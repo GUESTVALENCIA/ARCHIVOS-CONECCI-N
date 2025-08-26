@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>GuestsValencia · Sandra ProTech – Demo 3 rutas de audio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎙️ Sandra ProTech · Demo 3 rutas: Dictado · Conversación · Avatar</h1>
+    <p class="sub">Arquitectura sin conflictos de micrófono (clonado de track + sesiones separadas)</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <h2>1) Selección de dispositivos</h2>
+      <div class="row">
+        <label>Micrófono de entrada</label>
+        <select id="micSelect"></select>
+      </div>
+      <div class="row">
+        <label>Salida · Conversación (Sandra)</label>
+        <select id="outSelectRealtime"></select>
+      </div>
+      <div class="row">
+        <label>Salida · Avatar</label>
+        <select id="outSelectAvatar"></select>
+      </div>
+      <div class="row">
+        <button id="btnInit">Inicializar audio</button>
+        <span id="initStatus" class="status"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2) Dictado → Texto (STT)</h2>
+      <div class="row">
+        <button id="btnStartSTT">Iniciar Dictado</button>
+        <button id="btnStopSTT" disabled>Detener Dictado</button>
+        <span id="sttStatus" class="status"></span>
+      </div>
+      <textarea id="sttTranscript" placeholder="Transcripción en vivo..." rows="8"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>3) Conversación en tiempo real (OpenAI Realtime)</h2>
+      <div class="row">
+        <button id="btnStartRT">Conectar Conversación</button>
+        <button id="btnStopRT" disabled>Desconectar</button>
+        <span id="rtStatus" class="status"></span>
+      </div>
+      <div class="row">
+        <label>Modelo</label>
+        <input id="rtModel" value="gpt-4o-realtime-preview-2024-12-17">
+      </div>
+      <audio id="rtAudio" autoplay></audio>
+    </div>
+
+    <div class="card">
+      <h2>4) Avatar (RTC del proveedor)</h2>
+      <div class="row">
+        <button id="btnStartAV">Conectar Avatar</button>
+        <button id="btnStopAV" disabled>Desconectar</button>
+        <span id="avStatus" class="status"></span>
+      </div>
+      <video id="avVideo" autoplay playsinline></video>
+      <audio id="avAudio" autoplay></audio>
+      <div class="small">*Integra el SDK/RTC de tu proveedor (HeyGen/GIGN/Cartesia) en app.js → sección Avatar.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> GuestsValencia · Demo técnica. Construido con cariño para Claytis 💙</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
