@@ -1,0 +1,1 @@
+const BACKEND='https://TU_BACKEND_DOMINIO'; console.log('Configura BACKEND en app.js');
