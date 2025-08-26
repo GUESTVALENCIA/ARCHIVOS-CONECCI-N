@@ -1,0 +1,23 @@
+{
+  "name": "sandra-ultra-backend",
+  "version": "2.0.0",
+  "description": "Backend para Sandra Ultra: tokens efímeros Realtime, WS STT con autoidioma y sesgo de dominio.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "uuid": "^9.0.1",
+    "ws": "^8.18.0",
+    "url": "^0.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
