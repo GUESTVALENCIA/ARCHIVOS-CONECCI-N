@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Aviso Legal – GuestsValencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aviso legal de GuestsValencia. Datos del titular, OEPM, condiciones de uso y jurisdicción.">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;margin:0;padding:2rem;color:#222;}
+    h1,h2{margin-top:1.2em}
+    a{color:#0a58ca}
+    .meta{color:#555;font-size:.95rem}
+    .box{background:#f6f7f9;border:1px solid #e3e6ea;padding:1rem;border-radius:.5rem}
+    footer{margin-top:2rem;font-size:.9rem;color:#555}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aviso Legal</h1>
+    <p class="meta">Última actualización: <time datetime="2025-08-25">25/08/2025</time></p>
+  </header>
+
+  <section class="box" aria-labelledby="titular">
+    <h2 id="titular">Titular de la web</h2>
+    <p><strong>Marca comercial registrada:</strong> Guests-Valencia Alojamientos Vacacionales</p>
+    <p><strong>Registro OEPM:</strong> Expediente <b>N0460930(1)</b>, concesión 27/06/2024</p>
+    <p><strong>Razón social:</strong> Valencia Dancing Club, S.L.</p>
+    <p><strong>CIF:</strong> B16753949</p>
+    <p><strong>Domicilio social:</strong> Avenida de las Cortes Valencianas, 58, 5ª planta, Valencia, España</p>
+    <p><strong>Teléfono:</strong> +34 643 083 347</p>
+    <p><strong>Email:</strong> <a href="mailto:info@guestsvalencia.es">info@guestsvalencia.es</a></p>
+  </section>
+
+  <section aria-labelledby="propiedad">
+    <h2 id="propiedad">Propiedad intelectual e industrial</h2>
+    <p>La marca <strong>Guests-Valencia</strong> está protegida por la OEPM. Los contenidos de esta web (textos, imágenes, logotipos y software) pertenecen a sus legítimos titulares y están protegidos por la normativa vigente. Queda prohibida su reproducción total o parcial salvo autorización expresa.</p>
+  </section>
+
+  <section aria-labelledby="condiciones-uso">
+    <h2 id="condiciones-uso">Condiciones de uso</h2>
+    <p>El acceso y uso de esta web implica la aceptación del presente Aviso Legal. El usuario se compromete a hacer un uso lícito, diligente y conforme a la buena fe, evitando cualquier conducta que pudiera impedir el normal funcionamiento del sitio.</p>
+  </section>
+
+  <section aria-labelledby="responsabilidad">
+    <h2 id="responsabilidad">Responsabilidad</h2>
+    <p>GuestsValencia no se hace responsable de daños derivados de un uso inadecuado de la web ni de fallos técnicos, virus u otros elementos ajenos a su control que pudieran producir alteraciones en los sistemas del usuario.</p>
+  </section>
+
+  <section aria-labelledby="proteccion-datos">
+    <h2 id="proteccion-datos">Protección de datos</h2>
+    <p>El tratamiento de datos personales se regula en nuestra <a href="/politica-privacidad-condiciones.html">Política de Privacidad y Condiciones Generales</a>. También puedes descargar la versión oficial en PDF: <a href="sandbox:/mnt/data/Politica_Privacidad_Condiciones_GuestsValencia.pdf">descargar PDF</a>.</p>
+  </section>
+
+  <section aria-labelledby="ley">
+    <h2 id="ley">Legislación aplicable y jurisdicción</h2>
+    <p>Este Aviso Legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales de Valencia capital, salvo que la normativa de consumidores disponga lo contrario.</p>
+  </section>
+
+  <footer>
+    <p>© <span id="y"></span> GuestsValencia. Todos los derechos reservados.</p>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Política de Privacidad y Condiciones Generales – GuestsValencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Política de Privacidad RGPD y Condiciones de Contratación de GuestsValencia.">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.65;margin:0;padding:2rem;color:#222;max-width:1000px}
+    h1,h2,h3{margin-top:1.2em}
+    nav a{margin-right:1rem}
+    .box{background:#f6f7f9;border:1px solid #e3e6ea;padding:1rem;border-radius:.5rem}
+    a{color:#0a58ca}
+    ul{padding-left:1.2rem}
+    footer{margin-top:2rem;font-size:.9rem;color:#555}
+  </style>
+</head>
+<body>
+  <h1>Política de Privacidad y Condiciones Generales de Contratación</h1>
+  <p class="meta">Última actualización: <time datetime="2025-08-25">25/08/2025</time></p>
+
+  <nav aria-label="Índice">
+    <a href="#responsable">1. Responsable</a>
+    <a href="#datos">2. Datos que recopilamos</a>
+    <a href="#finalidades">3. Finalidades</a>
+    <a href="#legitimacion">4. Legitimación</a>
+    <a href="#derechos">5. Derechos</a>
+    <a href="#cesiones">6. Cesiones</a>
+    <a href="#cookies">7. Cookies</a>
+    <a href="#conservacion">8. Conservación</a>
+    <a href="#seguridad">9. Seguridad</a>
+    <a href="#cambios">10. Cambios</a>
+    <a href="#condiciones">Condiciones de Contratación</a>
+  </nav>
+
+  <section id="responsable" class="box">
+    <h2>1. Responsable del tratamiento</h2>
+    <p><strong>Razón social:</strong> Valencia Dancing Club, S.L.</p>
+    <p><strong>Marca comercial:</strong> GuestsValencia</p>
+    <p><strong>CIF:</strong> B16753949</p>
+    <p><strong>Domicilio social:</strong> Avenida de las Cortes Valencianas, 58, 5ª planta, Valencia, España</p>
+    <p><strong>Teléfono:</strong> +34 643 083 347</p>
+    <p><strong>Email:</strong> <a href="mailto:info@guestsvalencia.es">info@guestsvalencia.es</a></p>
+  </section>
+
+  <section id="datos">
+    <h2>2. Datos personales que recopilamos</h2>
+    <ul>
+      <li>Contacto: nombre, apellidos, email, teléfono.</li>
+      <li>Reservas: fechas, alojamiento, forma de pago.</li>
+      <li>Navegación: cookies, IP, páginas visitadas.</li>
+      <li>Facturación: NIF/CIF y dirección de facturación.</li>
+      <li>Preferencias de estancia (transporte, restauración, actividades), si las facilitas.</li>
+    </ul>
+  </section>
+
+  <section id="finalidades">
+    <h2>3. Finalidades del tratamiento</h2>
+    <ul>
+      <li>Gestionar reservas de alojamientos turísticos.</li>
+      <li>Atención personalizada (incluida asistencia con IA “Sandra”).</li>
+      <li>Comunicaciones de confirmación, incidencias y soporte.</li>
+      <li>Información comercial y promociones (con consentimiento previo).</li>
+      <li>Cumplimiento de obligaciones legales, fiscales y administrativas.</li>
+    </ul>
+  </section>
+
+  <section id="legitimacion">
+    <h2>4. Legitimación</h2>
+    <ul>
+      <li>Ejecución de contrato (reserva y servicios asociados).</li>
+      <li>Consentimiento del interesado (marketing).</li>
+      <li>Obligación legal (facturación, normativa turística y fiscal).</li>
+    </ul>
+  </section>
+
+  <section id="derechos">
+    <h2>5. Derechos</h2>
+    <p>Puedes ejercer acceso, rectificación, supresión, limitación, portabilidad y oposición escribiendo a <a href="mailto:info@guestsvalencia.es">info@guestsvalencia.es</a>. También puedes reclamar ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
+  </section>
+
+  <section id="cesiones">
+    <h2>6. Cesiones y encargados</h2>
+    <p>No cedemos datos a terceros salvo obligación legal. Colaboramos con proveedores (pasarelas de pago, software de gestión, hosting, mensajería, limpieza/mantenimiento) bajo contratos de encargo de tratamiento y confidencialidad. No realizamos transferencias fuera del EEE.</p>
+  </section>
+
+  <section id="cookies">
+    <h2>7. Cookies</h2>
+    <p>Usamos cookies técnicas, analíticas, de personalización y publicitarias. Puedes gestionar tus preferencias desde el banner inicial o consultar la <a href="/politica-cookies.html">Política de Cookies</a>. </p>
+  </section>
+
+  <section id="conservacion">
+    <h2>8. Plazos de conservación</h2>
+    <ul>
+      <li>Reservas y facturación: 6 años (obligación contable/fiscal).</li>
+      <li>Marketing: hasta retirada del consentimiento.</li>
+      <li>Navegación: según Política de Cookies.</li>
+    </ul>
+  </section>
+
+  <section id="seguridad">
+    <h2>9. Seguridad</h2>
+    <p>Aplicamos medidas técnicas y organizativas para proteger los datos frente a accesos no autorizados, pérdida o alteración.</p>
+  </section>
+
+  <section id="cambios">
+    <h2>10. Cambios en la política</h2>
+    <p>Podremos actualizar esta política para adaptarla a cambios normativos o de servicio. La versión vigente estará siempre disponible en esta página.</p>
+  </section>
+
+  <hr>
+
+  <section id="condiciones">
+    <h2>Condiciones Generales de Contratación</h2>
+
+    <h3>Objeto</h3>
+    <p>Regulan la relación entre GuestsValencia y el cliente respecto a alojamientos turísticos y servicios complementarios.</p>
+
+    <h3>Reservas</h3>
+    <ul>
+      <li>Se realizan por web, WhatsApp Business, teléfono o plataformas asociadas.</li>
+      <li>La reserva queda confirmada por escrito (email/WhatsApp); puede requerir pago o depósito previo.</li>
+    </ul>
+
+    <h3>Precios y pagos</h3>
+    <ul>
+      <li>Precios con IVA salvo indicación en contrario.</li>
+      <li>Métodos: tarjeta, transferencia, PayPal u otros habilitados.</li>
+    </ul>
+
+    <h3>Cancelaciones y modificaciones</h3>
+    <ul>
+      <li>Según política del alojamiento (flexible, semi-flexible, no reembolsable).</li>
+      <li>Si la cancelación es por fuerza mayor imputable a GuestsValencia: reembolso completo.</li>
+    </ul>
+
+    <h3>Check-in y check-out</h3>
+    <ul>
+      <li>Check-in desde 15:00 h; check-out hasta 11:00–12:00 h (según alojamiento).</li>
+      <li>Acceso autónomo mediante caja de seguridad o cerraduras inteligentes. Se facilitan instrucciones previas.</li>
+    </ul>
+
+    <h3>Uso del alojamiento</h3>
+    <ul>
+      <li>Prohibido fumar, celebrar fiestas o superar el aforo contratado.</li>
+      <li>Respetar horario de silencio 22:00–08:00.</li>
+    </ul>
+
+    <h3>Servicios incluidos y adicionales</h3>
+    <ul>
+      <li>Incluye: WiFi, ropa de cama, toallas.</li>
+      <li>Extras bajo solicitud: limpieza adicional, reservas en restaurantes, pedidos a domicilio.</li>
+      <li>Montanejos: acceso gratuito a las aguas termales de la Fuente de los Baños.</li>
+      <li>Altea Hills: acceso a piscina y zonas comunes de la urbanización.</li>
+    </ul>
+
+    <h3>Responsabilidades</h3>
+    <ul>
+      <li><strong>Cliente:</strong> responde de daños ocasionados durante la estancia; puede exigirse fianza reembolsable.</li>
+      <li><strong>GuestsValencia:</strong> garantiza los servicios contratados; no responde de cortes de suministros o causas de fuerza mayor ajenas a su control.</li>
+    </ul>
+
+    <h3>Propietarios asociados</h3>
+    <p>En alojamientos de terceros, GuestsValencia actúa como gestor/intermediario autorizado.</p>
+
+    <h3>Ley aplicable y jurisdicción</h3>
+    <p>Legislación española; tribunales de Valencia capital salvo normativa de consumidores.</p>
+
+    <p>Descarga oficial en PDF: <a href="sandbox:/mnt/data/Politica_Privacidad_Condiciones_GuestsValencia.pdf">Política de Privacidad y Condiciones (PDF)</a></p>
+  </section>
+
+  <footer>
+    <p>© <span id="y"></span> GuestsValencia · <a href="/aviso-legal.html">Aviso Legal</a> · <a href="/politica-cookies.html">Política de Cookies</a></p>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Política de Cookies – GuestsValencia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Política de Cookies de GuestsValencia: tipos, finalidades y gestión del consentimiento.">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.65;margin:0;padding:2rem;color:#222;max-width:1000px}
+    h1,h2{margin-top:1.2em}
+    a{color:#0a58ca}
+    .notice{background:#fff7e6;border:1px solid #ffe2b4;padding:1rem;border-radius:.5rem}
+    footer{margin-top:2rem;font-size:.9rem;color:#555}
+  </style>
+</head>
+<body>
+  <h1>Política de Cookies</h1>
+  <p class="notice">Puedes cambiar tu consentimiento en cualquier momento desde el botón “Configuración de cookies” del pie de página (siempre visible en el sitio).</p>
+
+  <section>
+    <h2>¿Qué son las cookies?</h2>
+    <p>Son pequeños archivos de texto que se almacenan en tu navegador cuando visitas una web y permiten, entre otras cosas, recordar tus preferencias o analizar el uso del sitio.</p>
+  </section>
+
+  <section>
+    <h2>Tipos de cookies que utilizamos</h2>
+    <ul>
+      <li><strong>Técnicas</strong>: necesarias para el funcionamiento básico del sitio.</li>
+      <li><strong>Analíticas</strong>: miden la navegación y nos ayudan a mejorar (p.ej., Google Analytics).</li>
+      <li><strong>Personalización</strong>: recuerdan idioma y preferencias.</li>
+      <li><strong>Publicitarias</strong>: muestran anuncios relevantes (solo si las aceptas).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Gestión del consentimiento</h2>
+    <p>Al entrar en la web puedes <strong>aceptar</strong>, <strong>rechazar</strong> o <strong>configurar</strong> las cookies desde el banner inicial. También puedes cambiar tu elección posteriormente desde el pie de página.</p>
+    <p>Además, puedes desactivar o eliminar cookies desde la configuración de tu navegador.</p>
+  </section>
+
+  <section>
+    <h2>Contacto</h2>
+    <p>Si tienes dudas sobre esta política, escríbenos a <a href="mailto:info@guestsvalencia.es">info@guestsvalencia.es</a>.</p>
+  </section>
+
+  <p>Descarga oficial en PDF: <a href="sandbox:/mnt/data/Politica_Cookies_GuestsValencia.pdf">Política de Cookies (PDF)</a></p>
+
+  <footer>
+    <p>© <span id="y"></span> GuestsValencia · <a href="/aviso-legal.html">Aviso Legal</a> · <a href="/politica-privacidad-condiciones.html">Política de Privacidad y Condiciones</a></p>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- Banner de cookies básico -->
+<div id="cookie-banner" style="position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;padding:1rem;display:none;z-index:9999">
+  <div style="max-width:1000px;margin:0 auto;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+    <span>Usamos cookies propias y de terceros para mejorar tu experiencia. Puedes aceptarlas, rechazarlas o configurarlas.</span>
+    <button id="cb-accept" style="padding:.5rem 1rem;border:0;background:#0a58ca;color:#fff;border-radius:.3rem">Aceptar</button>
+    <button id="cb-reject" style="padding:.5rem 1rem;border:1px solid #777;background:#222;color:#fff;border-radius:.3rem">Rechazar</button>
+    <a href="/politica-cookies.html" style="color:#9dd1ff">Más info</a>
+  </div>
+</div>
+<script>
+(function(){
+  const KEY='gv_cookie_consent';
+  const banner=document.getElementById('cookie-banner');
+  if(!localStorage.getItem(KEY)) banner.style.display='block';
+  document.getElementById('cb-accept').onclick=function(){localStorage.setItem(KEY,'accepted');banner.style.display='none';};
+  document.getElementById('cb-reject').onclick=function(){localStorage.setItem(KEY,'rejected');banner.style.display='none';};
+})();
+</script>
+
+
+
+
+
+<footer style="background:#111;color:#eee;padding:2rem 1rem;margin-top:3rem;font-size:.95rem;text-align:center">
+  <div style="max-width:1000px;margin:0 auto">
+    <p style="margin:0 0 1rem 0">
+      © <span id="year"></span> GuestsValencia · Todos los derechos reservados
+    </p>
+    <nav style="margin-bottom:.5rem">
+      <a href="/aviso-legal.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Aviso Legal</a> |
+      <a href="/politica-privacidad-condiciones.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Privacidad</a> |
+      <a href="/politica-cookies.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Cookies</a>
+    </nav>
+    <p style="font-size:.85rem;color:#bbb">
+      Marca registrada en la OEPM: Guests-Valencia Alojamientos Vacacionales · CIF B16753949
+    </p>
+    <p style="font-size:.85rem;color:#bbb">
+      Contacto: <a href="mailto:info@guestsvalencia.es" style="color:#9dd1ff">info@guestsvalencia.es</a> · Tel: +34 643 083 347
+    </p>
+  </div>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</footer>
+
+
+
+
+
+<footer style="background:#111;color:#eee;padding:2rem 1rem;margin-top:3rem;font-size:.95rem;text-align:center">
+  <div style="max-width:1000px;margin:0 auto">
+    <!-- Copyright -->
+    <p style="margin:0 0 1rem 0">
+      © <span id="year"></span> GuestsValencia · Todos los derechos reservados / All rights reserved
+    </p>
+
+    <!-- Navegación ES -->
+    <nav style="margin-bottom:.5rem">
+      <a href="/aviso-legal.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Aviso Legal</a> |
+      <a href="/politica-privacidad-condiciones.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Privacidad</a> |
+      <a href="/politica-cookies.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Cookies</a>
+    </nav>
+
+    <!-- Navegación EN -->
+    <nav style="margin-bottom:.5rem">
+      <a href="/en/legal-notice.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Legal Notice</a> |
+      <a href="/en/privacy-policy.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Privacy Policy</a> |
+      <a href="/en/cookies-policy.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Cookies Policy</a>
+    </nav>
+
+    <!-- Info legal -->
+    <p style="font-size:.85rem;color:#bbb">
+      Marca registrada en la OEPM: Guests-Valencia Alojamientos Vacacionales · CIF B16753949
+    </p>
+
+    <!-- Contacto -->
+    <p style="font-size:.85rem;color:#bbb">
+      Contacto: <a href="mailto:info@guestsvalencia.es" style="color:#9dd1ff">info@guestsvalencia.es</a> · Tel: +34 643 083 347
+    </p>
+  </div>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</footer>
+
+
+
+
+
+<footer style="background:#111;color:#eee;padding:2rem 1rem;margin-top:3rem;font-size:.95rem;text-align:center">
+  <div style="max-width:1000px;margin:0 auto">
+    <p style="margin:0 0 1rem 0">© <span id="year"></span> GuestsValencia · All rights reserved / Todos los derechos reservados</p>
+    <nav style="margin-bottom:.5rem">
+      <!-- ES -->
+      <a href="/aviso-legal.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Aviso Legal</a> |
+      <a href="/politica-privacidad-condiciones.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Privacidad</a> |
+      <a href="/politica-cookies.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Política de Cookies</a>
+      <br><!-- EN -->
+      <a href="/en/legal-notice.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Legal Notice</a> |
+      <a href="/en/privacy-policy.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Privacy Policy</a> |
+      <a href="/en/cookies-policy.html" style="color:#9dd1ff;margin:0 .75rem;text-decoration:none">Cookies Policy</a>
+    </nav>
+    <p style="font-size:.85rem;color:#bbb">
+      OEPM registered mark: Guests-Valencia Alojamientos Vacacionales · CIF B16753949
+    </p>
+    <p style="font-size:.85rem;color:#bbb">
+      Contacto / Contact: <a href="mailto:info@guestsvalencia.es" style="color:#9dd1ff">info@guestsvalencia.es</a> · +34 643 083 347
+    </p>
+  </div>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</footer>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+[SYSTEM PROMPT – SANDRA IA RECEPCIONISTA 7 ESTRELLAS]
+
+Tu nombre es Sandra. Eres la recepcionista virtual 7 estrellas de GuestsValencia, la marca turística de alojamientos vacacionales y de corta estancia en Valencia, Montanejos y Altea Hills. Representas excelencia, calidez mediterránea y atención humana impecable. 
+
+OBJETIVO:
+Tu misión es atender llamadas, mensajes de texto, voz o vídeo, acompañar al huésped desde el primer contacto hasta el check-out, resolver dudas, empatizar con calma, explicar normas, dar recomendaciones y fidelizar tanto a huéspedes como a propietarios potenciales.
+
+ESTILO DE CONVERSACIÓN:
+- Fluido, natural, empático, cercano y profesional.
+- Escucha activa: responde a lo que el cliente necesita, no solo lo que pregunta.
+- Sonrisa en la voz: transmite siempre amabilidad y calma.
+- Ofrece soluciones, nunca problemas.
+- Capacidad de regateo educado: puedes negociar precio usando como margen el ahorro de comisión de Airbnb/Booking + 3% adicional.
+- Puedes recomendar restaurantes, transporte, actividades locales, y gestionar reservas si el cliente lo desea.
+- Tono adaptado según tipo de cliente:
+   · Turista local → cercano, coloquial y cálido.
+   · Turista internacional → claro, pausado, explicativo.
+   · Propietario → profesional, convincente, orientado a beneficios y tranquilidad.
+   · Inversor → corporativo, estratégico, destacando la innovación ProTech.
+
+IDIOMAS:
+- Español (principal, tono mediterráneo, cálido).
+- Inglés internacional (acento neutro, claro y entendible).
+- Francés (cortesía, precisión, entonación elegante).
+- Italiano (cálido, expresivo).
+- Alemán (claro, estructurado).
+- [Opcional: si el cliente habla en otro idioma, usa traducción automática y responde con neutralidad].
+
+INDICACIONES:
+- Detecta el idioma del cliente automáticamente y responde en ese idioma.
+- Ajusta el acento y el registro: 
+   · Formal con propietarios/inversores.
+   · Cálido, empático y humano con huéspedes.
+- Repite información clave para asegurar comprensión en huéspedes internacionales.
+- Si no estás seguro en un idioma, usa frases más sencillas y claras.
+
+SERVICIOS CLAVE:
+- Check-in y check-out autónomos: explica cómo funciona cada alojamiento (llaves en caja de seguridad, acceso digital, etc.).
+- Información de valor: horarios, normas de silencio (22:00–08:00), servicios incluidos, transporte, atracciones, etc.
+- Montanejos: recordar que incluye acceso gratuito a la Fuente de los Baños (aguas termales).
+- Altea Hills: destacar lujo, vistas, piscina comunitaria, barbacoa y confort.
+- Gestión interna: avisar a Susana (Valencia) o Paloma (Montanejos) para limpieza/logística cuando toque.
+- Captación de propietarios: explicar ventajas de que GuestsValencia gestione sus alojamientos → beneficios sin preocupaciones, comisión justa, gestión integral.
+- Marketing: preparado para responder en redes sociales, campañas, podcast y generar interés en la marca GuestsValencia ProTech.
+
+OBJETIVO FINAL:
+Que cada huésped o propietario sienta que está hablando con una recepcionista real, 7 estrellas, profesional y cálida, que les acompaña en todo el proceso.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GuestsValencia es una marca comercial registrada en la OEPM (Expediente N0460930, concesión 27/06/2024).  
+Titular: Valencia Dancing Club, S.L. · CIF B16753949 · CNAE: 6820 (Alquiler de bienes inmobiliarios por cuenta propia)  
+Domicilio social: Avda. de las Cortes Valencianas, 58, 5ª planta, Valencia, España.  
+
+
+GuestsValencia is a registered trademark at the Spanish Patent and Trademark Office (OEPM, Record N0460930, granted 27/06/2024).  
+Holder: Valencia Dancing Club, S.L. · Tax ID (CIF) B16753949 · CNAE: 6820 (Rental of real estate properties on own account)  
+Registered address: Avda. de las Cortes Valencianas, 58, 5th floor, Valencia, Spain.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[SYSTEM PROMPT – SANDRA IA RECEPCIONISTA 7 ESTRELLAS PROTECH]
+
+Tu nombre es Sandra. Eres la recepcionista virtual 7 estrellas de GuestsValencia, la marca pionera en integrar la Inteligencia Artificial en el sector turístico e inmobiliario en España. Representas excelencia, innovación y calidez mediterránea.
+
+IDENTIDAD PROTECH:
+- GuestsValencia es la primera empresa que une hospitalidad, gestión turística y tecnología avanzada en un modelo integral ProTech.
+- Anuncia y recuerda en cada oportunidad que somos pioneros en España en el uso de IA para turismo, inmobiliaria y gestión de alojamientos.
+- Destaca siempre que el modelo ProTech ofrece a huéspedes, propietarios e inversores más confianza, transparencia y beneficios sin preocupaciones.
+
+OBJETIVO:
+Acompañar a huéspedes, propietarios e inversores con una experiencia de 7 estrellas. Resolver dudas, empatizar, explicar servicios y posicionar a GuestsValencia como referencia ProTech.
+
+ESTILO DE CONVERSACIÓN:
+- Fluido, empático, humano, elegante.
+- Voz cálida, cercana, siempre con un toque de innovación y vanguardia.
+- Capacidad de regateo educado, destacando que al reservar directo en GuestsValencia se eliminan comisiones de terceros (Airbnb, Booking), añadiendo un 3% extra de ahorro.
+- Inspirar confianza a propietarios e inversores resaltando la profesionalidad, el modelo ProTech y los beneficios económicos.
+
+IDIOMAS:
+- Español, Inglés, Francés, Italiano y Alemán. Detecta el idioma automáticamente y responde con naturalidad en ese idioma.
+- Tono adaptado: formal con propietarios/inversores, cálido y cercano con huéspedes.
+
+SERVICIOS CLAVE:
+- Check-in y check-out autónomos con asistencia guiada.
+- Explicación de normas y servicios incluidos en cada alojamiento.
+- Recomendaciones de transporte, ocio y gastronomía local.
+- Gestión de limpieza y coordinación interna con Susana (Valencia) y Paloma (Montanejos).
+- Captación de propietarios: explicar las ventajas de delegar la gestión en GuestsValencia, subrayando la innovación ProTech.
+- Comunicación corporativa: preparado para campañas en redes sociales, marketing, podcasts y presentaciones a inversores.
+
+MENSAJE PRINCIPAL:
+GuestsValencia es más que una empresa de gestión turística. Somos la primera marca ProTech en España: inteligencia artificial + hospitalidad + inmobiliario. Pioneros en una nueva forma de vivir la hospitalidad.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

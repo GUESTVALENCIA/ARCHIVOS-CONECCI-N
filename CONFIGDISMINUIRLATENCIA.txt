@@ -1,0 +1,100 @@
+Home
+Dominios & SSL
+valencia-dancing-club.com
+Ajustar destino
+Restablecer dominio
+Detalles
+Subdominios
+Privacidad y datos de contacto
+Transferencia y renovación
+Servidores DNS
+DNS
+ La protección de dominio está activada. Algunas de las funciones del dominio no se pueden modificar en este momento. Desactivar la protección de dominio
+
+Está utilizando los Servidores DNS de IONOS (configuración estándar).
+
+Utilizar servidores DNS personalizados
+Servidores DNS	Tipo
+ns1072.ui-dns.org	Servidores DNS de IONOS
+ns1066.ui-dns.biz	Servidores DNS de IONOS
+ns1105.ui-dns.com	Servidores DNS de IONOS
+ns1099.ui-dns.de	Servidores DNS de IONOS
+Temas de ayuda recomendados
+Usar servidores DNS propios para un dominio
+Configurar Glue Records para el servidor DNS
+Restablecer la configuración de un dominio
+Nueva administración DNS & Servidores DNS
+Hemos optimizado la administración DNS y de los servidores DNS. Nos importa su satisfacción. Es por ello que nos gustaría conocer su opinión acerca de la nueva administración DNS.
+Enviar opinión
+
+Crear un plan de backups para el DNS secundario
+El DNS secundario le permite hacer una copia de seguridad automática del archivo de zona de su dominio en un segundo servidor de nombres. Si el primer grupo de servidores de nombres falla, automáticamente se consultan las copias de seguridad que tienen un archivo de zona idéntico a los servidores de nombres principales. Para usar un DNS secundario, es necesario que active DNS Pro. No es posible usar el DNSSEC y un DNS secundario para el mismo nombre de dominio.
+
+Solicitar
+Nuestra recomendación para ti
+icon
+Tu dominio, mucho más que un simple nombre
+Mi IONOS
+Home
+Mi cuenta
+ Descubrir el mundo de IONOS
+Atención al Cliente
+Centro de Ayuda
+Contacto/Tu asesor personal
+Ionos logo
+Recomienda y gana con Aklamio
+Descargar la App de IONOS
+Ionos on Google Play
+Ionos on the App Store
+Todos los sistemas funcionan con normalidad
+
+© 2025 IONOS Cloud S.L.U.                Home
+Dominios & SSL
+valencia-dancing-club.com
+Ajustar destino
+Restablecer dominio
+Detalles
+Subdominios
+Privacidad y datos de contacto
+Transferencia y renovación
+Servidores DNS
+DNS
+ La protección de dominio está activada. Algunas de las funciones del dominio no se pueden modificar en este momento. Desactivar la protección de dominio
+
+DNSSEC
+Inactivo
+Activar
+Nombre de host, valor, tipo …
+Nombre de host, valor, tipo …
+
+Añadir registro
+Seleccionar todos	Tipo	Nombre de host	Valor	Servicio	Acciones
+Seleccionar	CNAME	_domainconnect	_domainconnect.1and1.com	Domain Connect	
+Seleccionar	MX	@	mx00.ionos.es	Mail	
+Seleccionar	MX	@	mx01.ionos.es	Mail	
+Seleccionar	CNAME	s1-ionos._domainkey	s1.dkim.ionos.com	Mail	
+Seleccionar	CNAME	s2-ionos._domainkey	s2.dkim.ionos.com	Mail	
+Seleccionar	CNAME	s42582890._domainkey	s42582890.dkim.ionos.com	Mail	
+Seleccionar	CNAME	autodiscover	adsredir.ionos.info	Mail	
+Seleccionar	A	@	217.160.0.199	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	AAAA	@	2001:8d8:100f:f000:0:0:0:212	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	TXT	_dep_ws_mutex	"3ea64349b6cff2fb70f4ba466d79a6167c43cea4bd36fae939529c94c59750cd_175614..."	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	A	www	217.160.0.199	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	AAAA	www	2001:8d8:100f:f000:0:0:0:212	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	TXT	_dep_ws_mutex.www	"dbd3db910b62e843d82ea4b837d7ce81e0ff8683c97d4d37a9f2edff493ad8d3_175614..."	Redireccionamiento: http://valencia-dancing-club.es	
+Seleccionar	TXT	@	"v=spf1 include:_spf-eu.ionos.com ~all"	SPF	
+More features
+Abrir el portal API
+Mayor estabilidad gracias a la configuración DNS avanzada
+DNS Pro proporciona fiabilidad y alto rendimiento gracias a una gran variedad de funciones. Los datos de los registros DNS se distribuyen entre múltiples servidores en todo el mundo, de modo que los visitantes de su sitio pueden conectarse al servidor con latencia disminuida. El paquete de DNS Pro ofrece características de seguridad y administración de la configuración DNS:
+
+Anycast premium: Disminuye la latencia y garantiza alta disponibilidad de sus dominios en todo el mundo. (No puede ser usado en combinación con el DNS secundario)
+DNSSEC: Evita que los hackers tomen el control de su sitio web, roben mensajes y datos. (No puede ser usado en combinación con el DNS secundario)
+Plantillas DNS: Cree grupos de registros DNS que apliquen a varios dominios.
+Backup DNS: Haga y restablezca copias de seguridad de los registros DNS
+DNS secundario: Ideal para administradores/proveedores de DNS que requieren servicios secundarios robustos o que desean ocultar su servidor primario.
+Solicitar
+Temas de ayuda recomendados
+Configuración DNS
+Su satisfacción es importante para nosotros
+Por favor, danos tu opinión sobre el producto. De esta manera podemos apoyarte aún mejor en el futuro.
