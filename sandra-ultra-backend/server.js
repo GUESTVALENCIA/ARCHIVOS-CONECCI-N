@@ -1,5 +1,5 @@
 /**
- * Sandra Ultra Backend v2.0 (Dockerized)
+ * Sandra Ultra Backend v2.0
  * - POST /token/realtime  -> token efímero (OpenAI Realtime)
  * - WS   /ws/stt?lang=es  -> STT con auto detección en primer bloque + sesgo de dominio
  * - POST /token/avatar    -> plantilla proveedor avatar
@@ -26,7 +26,7 @@ const DOMAIN_PROMPT = process.env.STT_PROMPT || [
   'check-in autónomo','cerradura inteligente','caja de seguridad','Susana','Paloma'
 ].join(', ');
 
-app.get('/health', (_req,res)=>res.json({ok:true, build:'2.0.0-docker'}));
+app.get('/health', (_req,res)=>res.json({ok:true, build:'2.0.0-caddy'}));
 
 app.post('/token/realtime', async (req, res) => {
   try {

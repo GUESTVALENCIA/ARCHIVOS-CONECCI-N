@@ -5,17 +5,29 @@ services:
     container_name: sandra-ultra-backend
     env_file:
       - ./sandra-ultra-backend/.env
-    ports:
-      - "8787:8787"
     restart: unless-stopped
+    networks:
+      - web
 
-  # Reverse proxy opcional (HTTP). Para HTTPS usa Caddy/Traefik o certificados.
-  nginx:
-    image: nginx:alpine
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
     depends_on:
       - api
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
     restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+
+volumes:
+  caddy_data:
+  caddy_config:

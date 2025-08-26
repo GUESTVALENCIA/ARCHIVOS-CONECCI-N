@@ -1,0 +1,19 @@
+# Reemplaza con tus dominios reales (puedes listar varios separados por coma)
+# guestsvalencia.es, www.guestsvalencia.es, guestsvalencia.com, www.guestsvalencia.com
+YOUR_DOMAIN_HERE {
+  # TLS automático (Let's Encrypt). Indica tu email para avisos/recuperación:
+  tls your-email@example.com
+
+  encode zstd gzip
+
+  # Cabeceras de seguridad recomendadas
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "no-referrer-when-downgrade"
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  }
+
+  # Proxy al backend
+  reverse_proxy api:8787
+}
