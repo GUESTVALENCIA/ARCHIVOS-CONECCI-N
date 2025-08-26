@@ -1,0 +1,63 @@
+# --------------------------------------
+# docker-compose.yml - Sandra Full Stack
+# --------------------------------------
+version: "3.9"
+
+services:
+  backend:
+    build: ./sandra-full-backend
+    container_name: sandra-backend
+    restart: unless-stopped
+    env_file:
+      - ./sandra-full-backend/.env
+    networks: [ web ]
+    expose:
+      - "8787"
+    # If you need persistent logs, uncomment volumes below
+    # volumes:
+    #   - ./logs/backend:/var/log/app
+
+  caddy:
+    image: caddy:2.7
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      # Hostnames for automatic HTTPS (Let's Encrypt). Set your domains here.
+      - CADDY_DOMAIN=guestsvalencia.es
+      - CADDY_DOMAIN_ALT=www.guestsvalencia.es
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [ web ]
+
+  # Optional TURN server for strict NATs (uncomment and configure credentials)
+  # turn:
+  #   image: instrumentisto/coturn
+  #   container_name: turn
+  #   restart: unless-stopped
+  #   environment:
+  #     - TURN_PORT=3478
+  #     - TURNS_PORT=5349
+  #     - REALM=guestsvalencia.es
+  #     - FQDN=turn.guestsvalencia.es
+  #     - USER=gvturn:supersecretpassword
+  #   command: ["-n", "--verbose", "--no-cli", "--no-tls", "--no-dtls", "--fingerprint",
+  #             "--realm=guestsvalencia.es",
+  #             "--user=gvturn:supersecretpassword",
+  #             "--listening-port=3478",
+  #             "--min-port=49152", "--max-port=49252"]
+  #   ports:
+  #     - "3478:3478/udp"
+  #   networks: [ web ]
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  caddy-data:
+  caddy-config:

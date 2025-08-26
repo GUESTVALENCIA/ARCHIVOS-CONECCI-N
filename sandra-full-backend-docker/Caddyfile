@@ -1,0 +1,44 @@
+\
+{
+    # Optional: increase timeouts for long streaming
+    servers {
+        protocols h1 h2 h3
+        read_timeout 120s
+        write_timeout 120s
+        idle_timeout 120s
+    }
+    # Email for Let's Encrypt
+    email admin@guestsvalencia.es
+}
+
+# Primary domain
+{$CADDY_DOMAIN}, {$CADDY_DOMAIN_ALT} {
+    encode gzip zstd
+
+    @api path /healthz /token/* /ws/*
+    reverse_proxy @api sandra-backend:8787 {
+        # WebSocket support
+        flush_interval -1
+        transport http {
+            versions h1 h2c
+        }
+    }
+
+    handle_path / {
+        # Fallback message if you hit root of proxy
+        respond "GuestsValencia Sandra API is running." 200
+    }
+
+    # Security headers (basic)
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "no-referrer-when-downgrade"
+        Permissions-Policy "microphone=(), geolocation=()"
+    }
+
+    tls {
+        # Automatic HTTPS via Let's Encrypt
+    }
+}
