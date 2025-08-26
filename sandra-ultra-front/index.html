@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Sandra Ultra · GuestsValencia ProTech</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎙️ Sandra Ultra · Multilingüe · Realtime + STT</h1>
+    <p class="sub">Detección automática de idioma · Transcripción en la misma sesión Realtime · 3 rutas sin conflicto</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <h2>1) Dispositivos y Preferencias</h2>
+      <div class="row">
+        <label>Micrófono</label>
+        <select id="micSelect"></select>
+      </div>
+      <div class="row">
+        <label>Salida · Conversación</label>
+        <select id="outRealtime"></select>
+      </div>
+      <div class="row">
+        <label>Salida · Avatar</label>
+        <select id="outAvatar"></select>
+      </div>
+      <div class="row">
+        <label>Idioma STT manual</label>
+        <select id="sttLang">
+          <option value="">Auto (recomendado)</option>
+          <option value="es">Español (es)</option>
+          <option value="en">English (en)</option>
+          <option value="fr">Français (fr)</option>
+          <option value="it">Italiano (it)</option>
+          <option value="de">Deutsch (de)</option>
+          <option value="pt">Português (pt)</option>
+        </select>
+      </div>
+      <div class="row">
+        <button id="btnInit">Inicializar audio</button>
+        <span id="initStatus" class="status"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2) Dictado (WS STT con autoidioma)</h2>
+      <div class="row">
+        <button id="btnStartSTT" disabled>Iniciar Dictado</button>
+        <button id="btnStopSTT" disabled>Detener</button>
+        <span id="sttStatus" class="status"></span>
+      </div>
+      <textarea id="sttTranscript" placeholder="Transcripción WS…" rows="8"></textarea>
+      <p class="small">El primer bloque detecta idioma automáticamente. Luego fija el idioma para mayor precisión.</p>
+    </div>
+
+    <div class="card">
+      <h2>3) Conversación Realtime (audio + transcripción integrada)</h2>
+      <div class="row">
+        <button id="btnStartRT" disabled>Conectar Conversación</button>
+        <button id="btnStopRT" disabled>Desconectar</button>
+        <span id="rtStatus" class="status"></span>
+      </div>
+      <div class="row">
+        <label>Modelo</label>
+        <input id="rtModel" value="gpt-4o-realtime-preview-2024-12-17">
+      </div>
+      <audio id="rtAudio" autoplay></audio>
+      <textarea id="rtTranscript" placeholder="Transcripción Realtime…" rows="8"></textarea>
+      <p class="small">La sesión Realtime devuelve texto y audio sincronizados por el mismo peer.</p>
+    </div>
+
+    <div class="card">
+      <h2>4) Avatar (RTC del proveedor)</h2>
+      <div class="row">
+        <button id="btnStartAV" disabled>Conectar Avatar</button>
+        <button id="btnStopAV" disabled>Desconectar</button>
+        <span id="avStatus" class="status"></span>
+      </div>
+      <video id="avVideo" autoplay playsinline></video>
+      <audio id="avAudio" autoplay></audio>
+      <div class="small">Integra el SDK/RTC real del proveedor (HeyGen/GIGN/Cartesia) en <code>app.js</code>.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> GuestsValencia · Sandra Ultra · build: 2025-08-26T00:27:35.868750</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
