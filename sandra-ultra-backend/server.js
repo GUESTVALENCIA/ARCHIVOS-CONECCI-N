@@ -1,5 +1,5 @@
 /**
- * Sandra Ultra Backend v2.0
+ * Sandra Ultra Backend v2.0 (Dockerized)
  * - POST /token/realtime  -> token efímero (OpenAI Realtime)
  * - WS   /ws/stt?lang=es  -> STT con auto detección en primer bloque + sesgo de dominio
  * - POST /token/avatar    -> plantilla proveedor avatar
@@ -26,16 +26,15 @@ const DOMAIN_PROMPT = process.env.STT_PROMPT || [
   'check-in autónomo','cerradura inteligente','caja de seguridad','Susana','Paloma'
 ].join(', ');
 
-app.get('/health', (_req,res)=>res.json({ok:true, build:'2.0.0'}));
+app.get('/health', (_req,res)=>res.json({ok:true, build:'2.0.0-docker'}));
 
-// 1) Token efímero Realtime
 app.post('/token/realtime', async (req, res) => {
   try {
     const { model='gpt-4o-realtime-preview-2024-12-17', voice='verse' } = req.body || {};
     const r = await fetch('https://api.openai.com/v1/realtime/sessions', {
       method:'POST',
       headers:{ Authorization:`Bearer ${OPENAI_API_KEY}`, 'Content-Type':'application/json' },
-      body: JSON.stringify({ model, voice /*, instructions: "Sandra ProTech..."*/ })
+      body: JSON.stringify({ model, voice })
     });
     const data = await r.json();
     if (!r.ok) return res.status(500).json({ error:'openai_error', detail:data });
@@ -43,12 +42,10 @@ app.post('/token/realtime', async (req, res) => {
   } catch(e){ res.status(500).json({ error:'server_error', detail:String(e) }); }
 });
 
-// 2) Token avatar (plantilla)
 app.post('/token/avatar', (_req, res) => res.json({
   ok:true, provider:'YourAvatarProvider', token:'REPLACE_ME', rtcEndpoint:'https://provider.example.com/rtc'
 }));
 
-// 3) WS STT con auto detección de idioma
 const wss = new WebSocketServer({ noServer: true });
 const CONN = new Map();
 function wsSend(ws,obj){ try{ ws.send(JSON.stringify(obj)); }catch{} }
@@ -67,10 +64,10 @@ async function transcribe(buf, lang){
   });
   const data = await r.json();
   if (!r.ok) throw new Error(JSON.stringify(data));
-  return data; // puede traer text y language
+  return data;
 }
 
-const server = app.listen(PORT, ()=>console.log(`[OK] Backend en http://localhost:${PORT}`));
+const server = app.listen(PORT, ()=>console.log(`[OK] Backend en http://0.0.0.0:${PORT}`));
 
 server.on('upgrade', (req, socket, head) => {
   const { pathname, query } = parse(req.url, true);

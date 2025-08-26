@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  api:
+    build: ./sandra-ultra-backend
+    container_name: sandra-ultra-backend
+    env_file:
+      - ./sandra-ultra-backend/.env
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+
+  # Reverse proxy opcional (HTTP). Para HTTPS usa Caddy/Traefik o certificados.
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - api
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    restart: unless-stopped
