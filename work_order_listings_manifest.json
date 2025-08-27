@@ -1,0 +1,76 @@
+{
+  "repo_url": "https://github.com/<org>/<repo>",
+  "target_branch": "feature/listings-bundle",
+  "base_branch": "main",
+  "files": [
+    {
+      "path": "public/listings/listing-cabanal.html",
+      "price_per_night": 120,
+      "cleaning_fee": 30,
+      "service_fee_pct": 0.05,
+      "images_dir": "public/images/cabanal/",
+      "hero_image": "hero.jpg",
+      "paypal_client_id_placeholder": "CLIENT_ID_AQUI",
+      "widget": {
+        "name": "Sandra",
+        "labels": {
+          "en": "Easy Payment",
+          "es": "Pago Fácil"
+        }
+      }
+    },
+    {
+      "path": "public/listings/listing-mendez.html",
+      "price_per_night": 55,
+      "cleaning_fee": 15,
+      "service_fee_pct": 0.05,
+      "images_dir": "public/images/mendez/",
+      "hero_image": "hero-room.jpg",
+      "paypal_client_id_placeholder": "CLIENT_ID_AQUI",
+      "widget": {
+        "name": "Sandra",
+        "labels": {
+          "en": "Easy Payment",
+          "es": "Pago Fácil"
+        }
+      }
+    },
+    {
+      "path": "public/listings/listing-altea.html",
+      "price_per_night": 220,
+      "cleaning_fee": 40,
+      "service_fee_pct": 0.05,
+      "images_dir": "public/images/altea/",
+      "hero_image": "hero.jpg",
+      "paypal_client_id_placeholder": "CLIENT_ID_AQUI",
+      "widget": {
+        "name": "Sandra",
+        "labels": {
+          "en": "Easy Payment",
+          "es": "Pago Fácil"
+        }
+      }
+    },
+    {
+      "path": "public/listings/listing-betera.html",
+      "price_per_night": 85,
+      "cleaning_fee": 25,
+      "service_fee_pct": 0.05,
+      "images_dir": "public/images/betera/",
+      "hero_image": "hero.jpg",
+      "paypal_client_id_placeholder": "CLIENT_ID_AQUI",
+      "widget": {
+        "name": "Sandra",
+        "labels": {
+          "en": "Easy Payment",
+          "es": "Pago Fácil"
+        }
+      }
+    }
+  ],
+  "notes": [
+    "Copy HTML blocks from Canvas doc to these paths.",
+    "Replace PayPal client ID.",
+    "Adjust prices/fees as needed."
+  ]
+}
