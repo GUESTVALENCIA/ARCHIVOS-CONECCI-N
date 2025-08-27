@@ -1,16 +1,20 @@
 name: Deploy (Netlify)
-on: {push: {branches: [main]}, workflow_dispatch: {}}
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nwtgck/actions-netlify@v2.0
+      - name: Publish to Netlify
+        uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: .
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: Automated deploy
+          deploy-message: "Automated deploy"
           enable-pull-request-comment: false
           enable-commit-comment: true
           overwrite-existing-files: true
