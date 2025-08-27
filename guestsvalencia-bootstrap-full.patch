@@ -1,0 +1,202 @@
+From c2dd18f568e8a75abe87f1509ff6cb5b9f949827 Mon Sep 17 00:00:00 2001
+From: Demo <demo@example.com>
+Date: Wed, 27 Aug 2025 20:20:14 +0000
+Subject: [PATCH] feat(web): bootstrap full MVP with property pages, index and
+ CI
+
+---
+ .github/CODEOWNERS                        |  1 +
+ .github/dependabot.yml                    |  2 ++
+ .github/pull_request_template.md          |  2 ++
+ .github/workflows/deploy-vercel.yml       | 16 +++++++++
+ assets/css/base.css                       | 21 ++++++++++++
+ assets/js/booking.js                      | 10 ++++++
+ index.html                                | 41 +++++++++++++++++++++++
+ public/properties/apartamento-betera.html |  1 +
+ public/properties/duplex-montanejos.html  |  1 +
+ public/properties/mendez-nunez-47.html    |  1 +
+ public/properties/villa-altea-hills.html  |  1 +
+ 11 files changed, 97 insertions(+)
+ create mode 100644 .github/CODEOWNERS
+ create mode 100644 .github/dependabot.yml
+ create mode 100644 .github/pull_request_template.md
+ create mode 100644 .github/workflows/deploy-vercel.yml
+ create mode 100644 assets/css/base.css
+ create mode 100644 assets/js/booking.js
+ create mode 100644 index.html
+ create mode 100644 public/properties/apartamento-betera.html
+ create mode 100644 public/properties/duplex-montanejos.html
+ create mode 100644 public/properties/mendez-nunez-47.html
+ create mode 100644 public/properties/villa-altea-hills.html
+
+diff --git a/.github/CODEOWNERS b/.github/CODEOWNERS
+new file mode 100644
+index 0000000..d2e539a
+--- /dev/null
++++ b/.github/CODEOWNERS
+@@ -0,0 +1 @@
++*  @claytis33
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+new file mode 100644
+index 0000000..e180032
+--- /dev/null
++++ b/.github/dependabot.yml
+@@ -0,0 +1,2 @@
++version: 2
++updates: []
+diff --git a/.github/pull_request_template.md b/.github/pull_request_template.md
+new file mode 100644
+index 0000000..4b3329b
+--- /dev/null
++++ b/.github/pull_request_template.md
+@@ -0,0 +1,2 @@
++## Descripción
++- [ ] Cambios incluidos
+diff --git a/.github/workflows/deploy-vercel.yml b/.github/workflows/deploy-vercel.yml
+new file mode 100644
+index 0000000..d4c8ad0
+--- /dev/null
++++ b/.github/workflows/deploy-vercel.yml
+@@ -0,0 +1,16 @@
++name: Deploy (Vercel)
++on:
++  push:
++    branches: [main]
++jobs:
++  deploy:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Vercel deploy
++        uses: amondnet/vercel-action@v25
++        with:
++          vercel-token: ${{ secrets.VERCEL_TOKEN }}
++          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
++          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
++          prod: true
+diff --git a/assets/css/base.css b/assets/css/base.css
+new file mode 100644
+index 0000000..1cc4e1b
+--- /dev/null
++++ b/assets/css/base.css
+@@ -0,0 +1,21 @@
++:root{
++  --bg:#0b0f14;--card:#121824;--muted:#a0aec0;--brand:#22c55e;--brand-2:#06b6d4;
++  --text:#e5eaf0;--ring:0 0 0 2px var(--brand) inset;
++}
++*{box-sizing:border-box}
++html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b0f14,#0c1320);
++color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6}
++.container{max-width:1100px;margin:0 auto;padding:24px}
++.card{background:linear-gradient(180deg,rgba(18,24,36,.9),rgba(18,24,36,.7));
++backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px}
++.badge{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.35);
++border-radius:999px;padding:6px 12px;font-size:12px;text-transform:uppercase}
++.chips{display:flex;flex-wrap:wrap;gap:10px}
++.chip{background:rgba(255,255,255,.06);border-radius:999px;padding:8px 12px;font-size:14px}
++h1{font-weight:800;font-size:40px;margin:0}h2{font-size:22px;margin:0 0 6px}
++p.lead{font-size:18px;color:#d1d9e6;margin:8px 0 16px}
++.row{display:flex;gap:14px;flex-wrap:wrap}
++hr.sep{border:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);margin:18px 0}
++input,textarea{background:#0e1622;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;color:#e5eaf0}
++button{cursor:pointer;border:0;border-radius:12px;padding:13px 16px;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#081018;font-weight:700}
++.footer{opacity:.8;font-size:13px;margin-top:22px}
+diff --git a/assets/js/booking.js b/assets/js/booking.js
+new file mode 100644
+index 0000000..dafaf77
+--- /dev/null
++++ b/assets/js/booking.js
+@@ -0,0 +1,10 @@
++function wa(number, text){
++  const msg = encodeURIComponent(text);
++  window.open(`https://wa.me/${number}?text=${msg}`, '_blank');
++}
++function contacto(){
++  const nombre = document.querySelector('#nombre')?.value || '';
++  const mensaje = document.querySelector('#mensaje')?.value || '';
++  const phone = window.WHATSAPP_PHONE || '34600000000';
++  wa(phone, `Hola, soy ${nombre}. ${mensaje}`);
++}
+\ No newline at end of file
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..311d791
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,41 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>GuestsValencia · Alojamientos</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>GuestsValencia</h1>
++      <p class="lead">Alojamientos en Valencia, Montanejos y Altea con llegada autónoma y atención 7★ por Sandra IA.</p>
++      <div class="chips">
++        <a class="chip" href="/public/properties/mendez-nunez-47.html">Méndez Núñez 47 · Valencia</a>
++        <a class="chip" href="/public/properties/villa-altea-hills.html">Villa · Altea Hills</a>
++        <a class="chip" href="/public/properties/duplex-montanejos.html">Dúplex · Montanejos</a>
++        <a class="chip" href="/public/properties/apartamento-betera.html">Apartamento · Bétera</a>
++      </div>
++
++      <hr class="sep" />
++      <h2>Contacto</h2>
++      <div class="row">
++        <input id="nombre" placeholder="Tu nombre" />
++        <input id="mensaje" placeholder="¿Cómo te ayudamos?" />
++        <button onclick="contacto()">Escribir por WhatsApp</button>
++      </div>
++
++      <div class="footer">Valencia Dancing Club SL · GuestsValencia</div>
++    </div>
++  </div>
++  <script>
++    window.WHATSAPP_PHONE = window.WHATSAPP_PHONE || '34600000000';
++  </script>
++  <script src="/assets/js/booking.js"></script>
++</body>
++</html>
+diff --git a/public/properties/apartamento-betera.html b/public/properties/apartamento-betera.html
+new file mode 100644
+index 0000000..57353ad
+--- /dev/null
++++ b/public/properties/apartamento-betera.html
+@@ -0,0 +1 @@
++<!doctype html><html lang='es'><body><h1>apartamento-betera placeholder</h1></body></html>
+\ No newline at end of file
+diff --git a/public/properties/duplex-montanejos.html b/public/properties/duplex-montanejos.html
+new file mode 100644
+index 0000000..314663a
+--- /dev/null
++++ b/public/properties/duplex-montanejos.html
+@@ -0,0 +1 @@
++<!doctype html><html lang='es'><body><h1>duplex-montanejos placeholder</h1></body></html>
+\ No newline at end of file
+diff --git a/public/properties/mendez-nunez-47.html b/public/properties/mendez-nunez-47.html
+new file mode 100644
+index 0000000..14025e8
+--- /dev/null
++++ b/public/properties/mendez-nunez-47.html
+@@ -0,0 +1 @@
++<!doctype html><html lang='es'><body><h1>mendez-nunez-47 placeholder</h1></body></html>
+\ No newline at end of file
+diff --git a/public/properties/villa-altea-hills.html b/public/properties/villa-altea-hills.html
+new file mode 100644
+index 0000000..90e17e2
+--- /dev/null
++++ b/public/properties/villa-altea-hills.html
+@@ -0,0 +1 @@
++<!doctype html><html lang='es'><body><h1>villa-altea-hills placeholder</h1></body></html>
+\ No newline at end of file
+-- 
+2.39.2
+

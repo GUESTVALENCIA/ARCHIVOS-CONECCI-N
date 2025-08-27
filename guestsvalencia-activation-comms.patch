@@ -1,0 +1,821 @@
+From 3bd76685e108ca349ece2c221b9c202cf4461492 Mon Sep 17 00:00:00 2001
+From: Demo <demo@example.com>
+Date: Wed, 27 Aug 2025 20:30:02 +0000
+Subject: [PATCH 1/2] feat(web): base super-full MVP
+
+---
+ .github/CODEOWNERS                        |   2 +
+ .github/dependabot.yml                    |   6 +
+ .github/pull_request_template.md          |  12 ++
+ .github/workflows/deploy-netlify.yml      |  23 ++++
+ .github/workflows/deploy-vercel.yml       |  18 +++
+ assets/css/base.css                       |  49 ++++++++
+ assets/js/booking.js                      |  30 +++++
+ assets/js/sandra.js                       | 145 ++++++++++++++++++++++
+ index.html                                |  80 ++++++++++++
+ public/properties/apartamento-betera.html |  69 ++++++++++
+ public/properties/duplex-montanejos.html  |  69 ++++++++++
+ public/properties/mendez-nunez-47.html    |  69 ++++++++++
+ public/properties/villa-altea-hills.html  |  69 ++++++++++
+ 13 files changed, 641 insertions(+)
+ create mode 100644 .github/CODEOWNERS
+ create mode 100644 .github/dependabot.yml
+ create mode 100644 .github/pull_request_template.md
+ create mode 100644 .github/workflows/deploy-netlify.yml
+ create mode 100644 .github/workflows/deploy-vercel.yml
+ create mode 100644 assets/css/base.css
+ create mode 100644 assets/js/booking.js
+ create mode 100644 assets/js/sandra.js
+ create mode 100644 index.html
+ create mode 100644 public/properties/apartamento-betera.html
+ create mode 100644 public/properties/duplex-montanejos.html
+ create mode 100644 public/properties/mendez-nunez-47.html
+ create mode 100644 public/properties/villa-altea-hills.html
+
+diff --git a/.github/CODEOWNERS b/.github/CODEOWNERS
+new file mode 100644
+index 0000000..b52f4de
+--- /dev/null
++++ b/.github/CODEOWNERS
+@@ -0,0 +1,2 @@
++*  @claytis33
++/public/properties/  @claytis33
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+new file mode 100644
+index 0000000..5ace460
+--- /dev/null
++++ b/.github/dependabot.yml
+@@ -0,0 +1,6 @@
++version: 2
++updates:
++  - package-ecosystem: "github-actions"
++    directory: "/"
++    schedule:
++      interval: "weekly"
+diff --git a/.github/pull_request_template.md b/.github/pull_request_template.md
+new file mode 100644
+index 0000000..6dcf331
+--- /dev/null
++++ b/.github/pull_request_template.md
+@@ -0,0 +1,12 @@
++## Descripción
++- [ ] Cambios incluidos en este PR
++
++## Checklist
++- [ ] Pasa build/CI
++- [ ] Revisado por al menos 1 persona
++- [ ] Actualiza documentación si aplica
++
++## Screenshots (si aplica)
++
++## Incidencias relacionadas
++Closes #
+diff --git a/.github/workflows/deploy-netlify.yml b/.github/workflows/deploy-netlify.yml
+new file mode 100644
+index 0000000..3cfdb84
+--- /dev/null
++++ b/.github/workflows/deploy-netlify.yml
+@@ -0,0 +1,23 @@
++name: Deploy (Netlify)
++on:
++  push:
++    branches: [main]
++  workflow_dispatch:
++jobs:
++  deploy:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Publish to Netlify
++        uses: nwtgck/actions-netlify@v2.0
++        with:
++          publish-dir: .
++          production-branch: main
++          github-token: ${{ secrets.GITHUB_TOKEN }}
++          deploy-message: "Automated deploy"
++          enable-pull-request-comment: false
++          enable-commit-comment: true
++          overwrite-existing-files: true
++        env:
++          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
++          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+diff --git a/.github/workflows/deploy-vercel.yml b/.github/workflows/deploy-vercel.yml
+new file mode 100644
+index 0000000..91bfd5a
+--- /dev/null
++++ b/.github/workflows/deploy-vercel.yml
+@@ -0,0 +1,18 @@
++name: Deploy (Vercel)
++on:
++  push:
++    branches: [main]
++  workflow_dispatch:
++jobs:
++  deploy:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Vercel deploy
++        uses: amondnet/vercel-action@v25
++        with:
++          vercel-token: ${{ secrets.VERCEL_TOKEN }}
++          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
++          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
++          working-directory: .
++          prod: true
+diff --git a/assets/css/base.css b/assets/css/base.css
+new file mode 100644
+index 0000000..a794c38
+--- /dev/null
++++ b/assets/css/base.css
+@@ -0,0 +1,49 @@
++
++:root{
++  --bg:#0b0f14;
++  --card:#121824;
++  --muted:#a0aec0;
++  --brand:#22c55e;
++  --brand-2:#06b6d4;
++  --text:#e5eaf0;
++  --ring:0 0 0 2px var(--brand) inset;
++}
++
++*{box-sizing:border-box}
++html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b0f14 0%,#0b0f14 40%,#0c1320 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif;line-height:1.6}
++.container{max-width:1100px;margin:0 auto;padding:24px}
++.card{background:linear-gradient(180deg,rgba(18,24,36,.9),rgba(18,24,36,.7));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
++.grid{display:grid;gap:16px}
++.grid-2{grid-template-columns:1.1fr .9fr}
++@media (max-width:900px){.grid-2{grid-template-columns:1fr}}
++
++.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.35);color:#b9fff4;border-radius:999px;padding:6px 12px;font-size:12px;letter-spacing:.3px;text-transform:uppercase}
++.chips{display:flex;flex-wrap:wrap;gap:10px}
++.chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:8px 12px;font-size:14px}
++
++h1{font-weight:800;letter-spacing:-.02em;font-size:40px;margin:0}
++h2{font-size:22px;margin:0 0 6px}
++p.lead{font-size:18px;color:#d1d9e6;margin:8px 0 16px}
++
++.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:160px;gap:10px}
++.gallery div{position:relative;border-radius:16px;overflow:hidden;background:#0a0a0a;border:1px solid rgba(255,255,255,.06)}
++.gallery img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1) contrast(1.05)}
++@media (max-width:900px){.gallery{grid-template-columns:1fr;grid-auto-rows:200px}}
++
++.icon{width:18px;height:18px;display:inline-block;vertical-align:-3px;margin-right:8px}
++.row{display:flex;gap:14px;flex-wrap:wrap}
++.kv{flex:1 1 180px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);padding:12px 14px;border-radius:14px}
++
++.section{margin-top:24px}
++hr.sep{border:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);margin:18px 0}
++
++label{display:block;font-size:14px;color:#c7d2e0;margin-bottom:6px}
++input,select,textarea{width:100%;background:#0e1622;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;color:#e5eaf0;outline:none}
++input:focus,select:focus,textarea:focus{box-shadow:var(--ring)}
++button{cursor:pointer;border:0;border-radius:12px;padding:13px 16px;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#081018;font-weight:700}
++button.secondary{background:transparent;color:#d7e0ea;border:1px solid rgba(255,255,255,.16)}
++
++.footer{opacity:.8;font-size:13px;margin-top:22px}
++audio{width:100%}
++.map{width:100%;height:260px;border:0;border-radius:16px;filter:grayscale(.2) contrast(1.1) saturate(1.1)}
++.small{font-size:13px;color:var(--muted)}
+diff --git a/assets/js/booking.js b/assets/js/booking.js
+new file mode 100644
+index 0000000..c213bfc
+--- /dev/null
++++ b/assets/js/booking.js
+@@ -0,0 +1,30 @@
++
++function wa(number, text){
++  const msg = encodeURIComponent(text);
++  window.open(`https://wa.me/${number}?text=${msg}`, '_blank');
++}
++function reservar(property){
++  const entrada = document.querySelector('#entrada')?.value || '';
++  const salida = document.querySelector('#salida')?.value || '';
++  const huespedes = document.querySelector('#huespedes')?.value || '';
++  const nombre = document.querySelector('#nombre')?.value || '';
++  const notas = document.querySelector('#notas')?.value || '';
++
++  const parts = [];
++  parts.push(`¡Hola! Me gustaría reservar *${property}*`);
++  if(entrada) parts.push(`Entrada: ${entrada}`);
++  if(salida) parts.push(`Salida: ${salida}`);
++  if(huespedes) parts.push(`Huéspedes: ${huespedes}`);
++  if(nombre) parts.push(`Nombre: ${nombre}`);
++  if(notas) parts.push(`Notas: ${notas}`);
++
++  const msg = encodeURIComponent(parts.join('\n'));
++  const phone = window.WHATSAPP_PHONE || '34600000000';
++  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
++}
++function contacto(){
++  const nombre = document.querySelector('#nombre')?.value || '';
++  const mensaje = document.querySelector('#mensaje')?.value || '';
++  const phone = window.WHATSAPP_PHONE || '34600000000';
++  wa(phone, `Hola, soy ${nombre}. ${mensaje}`);
++}
+diff --git a/assets/js/sandra.js b/assets/js/sandra.js
+new file mode 100644
+index 0000000..2ab14fb
+--- /dev/null
++++ b/assets/js/sandra.js
+@@ -0,0 +1,145 @@
++
++/**
++ * Configuración (sustituir por valores reales en producción)
++ */
++const SANDRA_API_URL = window.SANDRA_API_URL || "https://api.sandra.local"; // TODO
++const SANDRA_API_KEY = window.SANDRA_API_KEY || "REPLACE_ME"; // TODO
++const AVATAR_IFRAME_URL = window.AVATAR_IFRAME_URL || "about:blank"; // TODO
++
++/**
++ * UI helpers
++ */
++const SandraUI = {
++  show(tab){
++    document.getElementById('panel-text').style.display  = (tab === 'text') ? 'block' : 'none';
++    document.getElementById('panel-voice').style.display = (tab === 'voice') ? 'block' : 'none';
++    document.getElementById('panel-avatar').style.display= (tab === 'avatar')? 'block' : 'none';
++  },
++  log(role, text){
++    const el = document.getElementById('chat-log');
++    const line = document.createElement('div');
++    line.style.marginBottom = '6px';
++    line.innerHTML = `<strong>${role}:</strong> ${text}`;
++    el.appendChild(line);
++    el.scrollTop = el.scrollHeight;
++  },
++  setVoiceStatus(text){
++    document.getElementById('voice-status').textContent = text || '';
++  }
++};
++
++/**
++ * API stubs (reemplazar con endpoints reales)
++ */
++const SandraAPI = {
++  async sendText(){
++    const input = document.getElementById('chat-input');
++    const msg = input.value.trim();
++    if(!msg) return;
++    SandraUI.log('Tú', msg);
++    input.value = '';
++
++    try{
++      // Ejemplo de llamada al backend de Sandra (texto a texto)
++      const res = await fetch(`${SANDRA_API_URL}/chat`, {
++        method: 'POST',
++        headers: {
++          'Content-Type': 'application/json',
++          'Authorization': `Bearer ${SANDRA_API_KEY}`
++        },
++        body: JSON.stringify({ message: msg })
++      });
++      if(!res.ok) throw new Error('HTTP ' + res.status);
++      const data = await res.json();
++      const reply = data.reply || '(respuesta de prueba)';
++      SandraUI.log('Sandra', reply);
++      // TTS de respuesta (opcional)
++      SandraAPI.playTTS(reply);
++    }catch(err){
++      console.error(err);
++      SandraUI.log('Sistema', 'No se pudo contactar con el backend. Modo demo activo.');
++      const demo = 'Hola 👋 Soy Sandra en modo demo. Cuando configures SANDRA_API_URL y la API Key, te responderé en tiempo real.';
++      SandraUI.log('Sandra', demo);
++      SandraAPI.playTTS(demo);
++    }
++  },
++
++  // VOZ: capturar audio con MediaRecorder y enviar al backend
++  _media: {rec:null, chunks:[]},
++
++  async startVoice(){
++    SandraUI.setVoiceStatus('Preparando micrófono...');
++    try{
++      const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
++      const rec = new MediaRecorder(stream);
++      this._media.rec = rec;
++      this._media.chunks = [];
++      rec.ondataavailable = e => this._media.chunks.push(e.data);
++      rec.onstop = async () => {
++        const blob = new Blob(this._media.chunks, { type: 'audio/webm' });
++        SandraUI.setVoiceStatus('Enviando audio...');
++        try{
++          const form = new FormData();
++          form.append('audio', blob, 'input.webm');
++          const res = await fetch(`${SANDRA_API_URL}/speech`, {
++            method: 'POST',
++            headers: { 'Authorization': `Bearer ${SANDRA_API_KEY}` },
++            body: form
++          });
++          if(!res.ok) throw new Error('HTTP ' + res.status);
++          const data = await res.json();
++          const text = data.text || '(texto reconocido)';
++          const reply = data.reply || '(respuesta voz)';
++          SandraUI.log('Tú (voz→texto)', text);
++          SandraUI.log('Sandra', reply);
++          SandraAPI.playTTS(reply);
++          SandraUI.setVoiceStatus('Listo.');
++        }catch(err){
++          console.error(err);
++          SandraUI.setVoiceStatus('No se pudo enviar audio. Modo demo.');
++          const demo = 'He recibido tu voz en modo demo. Cuando la API esté conectada, responderé con naturalidad.';
++          SandraUI.log('Sandra', demo);
++          SandraAPI.playTTS(demo);
++        }
++      };
++      rec.start();
++      SandraUI.setVoiceStatus('Grabando... suelta el botón para enviar.');
++    }catch(err){
++      console.error(err);
++      SandraUI.setVoiceStatus('Permiso de micrófono denegado o error.');
++    }
++  },
++
++  stopVoice(){
++    const rec = this._media.rec;
++    if(rec && rec.state !== 'inactive'){
++      rec.stop();
++      SandraUI.setVoiceStatus('Procesando audio...');
++    }
++  },
++
++  // TTS con Web Speech API (fallback)
++  playTTS(text){
++    try{
++      if(!('speechSynthesis' in window)) return;
++      const u = new SpeechSynthesisUtterance(text);
++      u.lang = 'es-ES';
++      window.speechSynthesis.cancel();
++      window.speechSynthesis.speak(u);
++    }catch{}
++  },
++
++  // AVATAR: carga iframe y envía mensajes mediante postMessage
++  loadAvatar(){
++    const iframe = document.getElementById('avatar-frame');
++    iframe.src = AVATAR_IFRAME_URL;
++  },
++  sendAvatarCommand(cmd){
++    const iframe = document.getElementById('avatar-frame');
++    if(!iframe.contentWindow){ return; }
++    iframe.contentWindow.postMessage({ type:'sandra-command', command: cmd }, '*');
++  }
++};
++
++window.SandraAPI = SandraAPI;
++window.SandraUI  = SandraUI;
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..91b8391
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,80 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>GuestsValencia · Alojamientos</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>GuestsValencia</h1>
++      <p class="lead">Alojamientos en Valencia, Montanejos y Altea con llegada autónoma y atención 7★ por Sandra IA.</p>
++      <div class="chips">
++        <a class="chip" href="/public/properties/mendez-nunez-47.html">Méndez Núñez 47 · Valencia</a>
++        <a class="chip" href="/public/properties/villa-altea-hills.html">Villa · Altea Hills</a>
++        <a class="chip" href="/public/properties/duplex-montanejos.html">Dúplex · Montanejos</a>
++        <a class="chip" href="/public/properties/apartamento-betera.html">Apartamento · Bétera</a>
++      </div>
++
++      <hr class="sep" />
++      <h2>Contacto</h2>
++      <div class="row">
++        <input id="nombre" placeholder="Tu nombre" />
++        <input id="mensaje" placeholder="¿Cómo te ayudamos?" />
++        <button onclick="contacto()">Escribir por WhatsApp</button>
++      </div>
++
++      
++      <hr class="sep" />
++      <h2>Comunicaciones con Sandra (Texto · Voz · Avatar)</h2>
++      <div class="card" style="padding:16px;margin-top:12px">
++        <div class="chips" style="margin-bottom:12px">
++          <button class="chip" onclick="SandraUI.show('text')">Texto</button>
++          <button class="chip" onclick="SandraUI.show('voice')">Voz</button>
++          <button class="chip" onclick="SandraUI.show('avatar')">Avatar</button>
++        </div>
++
++        <!-- TEXT CHAT -->
++        <div id="panel-text" style="display:block">
++          <div id="chat-log" style="height:220px;overflow:auto;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-bottom:10px"></div>
++          <div class="row">
++            <input id="chat-input" placeholder="Escribe tu mensaje para Sandra..." style="flex:1" />
++            <button onclick="SandraAPI.sendText()">Enviar</button>
++          </div>
++        </div>
++
++        <!-- VOICE -->
++        <div id="panel-voice" style="display:none">
++          <p class="small">Mantén pulsado “Grabar” para hablar con Sandra. Se enviará audio al backend (stub) y responderá por voz (TTS Web Speech como fallback).</p>
++          <div class="row">
++            <button id="btn-rec" onmousedown="SandraAPI.startVoice()" onmouseup="SandraAPI.stopVoice()">🎙️ Grabar (mantén)</button>
++            <button class="secondary" onclick="SandraAPI.playTTS('Hola, soy Sandra. Sistema listo para pruebas.')" >Probar TTS</button>
++          </div>
++          <div id="voice-status" class="small" style="margin-top:8px"></div>
++        </div>
++
++        <!-- AVATAR -->
++        <div id="panel-avatar" style="display:none">
++          <p class="small">Vista previa del avatar (iframe). Configura <code>AVATAR_IFRAME_URL</code> en <code>sandra.js</code>.</p>
++          <iframe id="avatar-frame" style="width:100%;height:340px;border:1px solid rgba(255,255,255,.15);border-radius:12px" src="about:blank"></iframe>
++          <div class="row" style="margin-top:8px">
++            <button onclick="SandraAPI.loadAvatar()">Cargar Avatar</button>
++            <button class="secondary" onclick="SandraAPI.sendAvatarCommand('hola')">Enviar “hola”</button>
++          </div>
++        </div>
++      </div>
++
++      <div class="footer">Valencia Dancing Club SL · GuestsValencia</div>
++    </div>
++  </div>
++  <script>window.WHATSAPP_PHONE = window.WHATSAPP_PHONE || '34600000000';</script>
++  <script src="/assets/js/booking.js"></script>
++  <script src="/assets/js/sandra.js"></script>
++</body>
++</html>
+diff --git a/public/properties/apartamento-betera.html b/public/properties/apartamento-betera.html
+new file mode 100644
+index 0000000..1935a1f
+--- /dev/null
++++ b/public/properties/apartamento-betera.html
+@@ -0,0 +1,69 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>Apartamento en Bétera · Llegada 100% autónoma · GuestsValencia</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>Apartamento en Bétera · Llegada 100% autónoma</h1>
++      <p class="lead">Apartamento cómodo con acceso inteligente: abre el portal desde el móvil y entra con código. Ideal para teletrabajo.</p>
++      <div class="chips" style="margin:10px 0 18px"><span class="chip">Self check-in digital</span><span class="chip">Cerca de Valencia</span><span class="chip">Tranquilo</span></div>
++      <div class="gallery"><div><img src="https://images.unsplash.com/photo-1521783988139-893ce0b796b4" alt="Foto de Apartamento en Bétera · Llegada 100% autónoma"></div><div><img src="https://images.unsplash.com/photo-1451976426598-a7593bd6d0b2" alt="Foto de Apartamento en Bétera · Llegada 100% autónoma"></div><div><img src="https://images.unsplash.com/photo-1460317442991-0ec209397118" alt="Foto de Apartamento en Bétera · Llegada 100% autónoma"></div><div><img src="https://images.unsplash.com/photo-1465311440653-ba9b1d9b0f5b" alt="Foto de Apartamento en Bétera · Llegada 100% autónoma"></div></div>
++      <div class="section grid grid-2">
++        <div>
++          <h2>Aspectos destacados</h2>
++          <ul><li>Apertura remota de la puerta del edificio y cerradura digital.</li><li>Zona tranquila con buena conexión a Valencia.</li><li>Espacio preparado para trabajo remoto.</li></ul>
++          <hr class="sep">
++          <h2>Qué incluye</h2>
++          <div class="chips"><span class="chip">Aire acondicionado</span><span class="chip">Calefacción</span><span class="chip">Cocina completa</span><span class="chip">Lavadora</span><span class="chip">Smart TV</span><span class="chip">Balcón</span></div>
++          <hr class="sep">
++          <h2>Normas y check-in</h2>
++          <ul><li>Recibirás un enlace para abrir el portal desde tu móvil.</li><li>Código temporal para la cerradura digital.</li><li>Respeta las normas de la comunidad y el descanso vecinal.</li></ul>
++          <p class="small">Horario de silencio recomendado 23:00–08:00. Prohibidas fiestas. Respeto al vecindario.</p>
++          <hr class="sep">
++          <h2>Mensaje de bienvenida de Sandra</h2>
++          <p class="small">Pulsa play para escuchar instrucciones rápidas de llegada y consejos locales.</p>
++          <audio controls src="/assets/audio/sandra-bienvenida.mp3">
++            Tu navegador no soporta audio. Descarga el archivo desde el panel de gestión.
++          </audio>
++        </div>
++        <div>
++          <h2>Reserva</h2>
++          <label for="entrada">Fecha de entrada</label>
++          <input id="entrada" type="date">
++          <label for="salida">Fecha de salida</label>
++          <input id="salida" type="date">
++          <label for="huespedes">Huéspedes</label>
++          <select id="huespedes">
++            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
++            <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
++          </select>
++          <label for="nombre">Tu nombre</label>
++          <input id="nombre" type="text" placeholder="Nombre y apellidos">
++          <label for="notas">Notas (hora de llegada, peticiones...)</label>
++          <textarea id="notas" rows="4" placeholder="Cuéntanos cualquier necesidad especial"></textarea>
++          <div class="row" style="margin-top:12px">
++            <button onclick="reservar('Apartamento en Bétera · Llegada 100% autónoma')">Reservar por WhatsApp</button>
++            <button class="secondary" onclick="alert('Próximamente: pasarela de pago propia sin comisiones.')">Pagar online (próximamente)</button>
++          </div>
++          <div class="section">
++            <h2>Ubicación</h2>
++            <iframe class="map" src="https://www.google.com/maps?q=B%C3%A9tera,+Spain&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
++            <p class="small">Envíanos tu hora estimada de llegada para coordinar limpieza y preparativos.</p>
++          </div>
++        </div>
++      </div>
++      <div class="footer">GuestsValencia · Atención 7★ con Sandra IA · <a href="#" style="color:#8be9ff">Política de cancelación</a></div>
++    </div>
++  </div>
++  <script src="/assets/js/booking.js"></script>
++</body>
++</html>
+diff --git a/public/properties/duplex-montanejos.html b/public/properties/duplex-montanejos.html
+new file mode 100644
+index 0000000..5765874
+--- /dev/null
++++ b/public/properties/duplex-montanejos.html
+@@ -0,0 +1,69 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>Dúplex en Montanejos · Acceso a Fuente de los Baños · GuestsValencia</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>Dúplex en Montanejos · Acceso a Fuente de los Baños</h1>
++      <p class="lead">Dúplex acogedor con llegada inteligente y acceso incluido a las aguas termales de la Fuente de los Baños.</p>
++      <div class="chips" style="margin:10px 0 18px"><span class="chip">Termal · Relax</span><span class="chip">Llegada digital</span><span class="chip">Naturaleza</span></div>
++      <div class="gallery"><div><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Foto de Dúplex en Montanejos · Acceso a Fuente de los Baños"></div><div><img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4" alt="Foto de Dúplex en Montanejos · Acceso a Fuente de los Baños"></div><div><img src="https://images.unsplash.com/photo-1504788363733-507549153474" alt="Foto de Dúplex en Montanejos · Acceso a Fuente de los Baños"></div><div><img src="https://images.unsplash.com/photo-1445308394109-4ec2920981b1" alt="Foto de Dúplex en Montanejos · Acceso a Fuente de los Baños"></div></div>
++      <div class="section grid grid-2">
++        <div>
++          <h2>Aspectos destacados</h2>
++          <ul><li>Acceso incluido a la Fuente de los Baños (planillas en oficina de turismo).</li><li>Puerta del edificio abierta en remoto y cerradura digital por código.</li><li>Perfecto para escapadas de relax y senderismo.</li></ul>
++          <hr class="sep">
++          <h2>Qué incluye</h2>
++          <div class="chips"><span class="chip">Aire acondicionado</span><span class="chip">Calefacción</span><span class="chip">Cocina equipada</span><span class="chip">Lavadora</span><span class="chip">Smart TV</span><span class="chip">Kit de café/té</span></div>
++          <hr class="sep">
++          <h2>Normas y check-in</h2>
++          <ul><li>Edificio con apertura remota desde móvil; cerradura digital.</li><li>Las planillas para el balneario se recogen en la oficina de turismo (incluido en el precio).</li><li>Salida 11:00; entrada 15:00.</li></ul>
++          <p class="small">Horario de silencio recomendado 23:00–08:00. Prohibidas fiestas. Respeto al vecindario.</p>
++          <hr class="sep">
++          <h2>Mensaje de bienvenida de Sandra</h2>
++          <p class="small">Pulsa play para escuchar instrucciones rápidas de llegada y consejos locales.</p>
++          <audio controls src="/assets/audio/sandra-bienvenida.mp3">
++            Tu navegador no soporta audio. Descarga el archivo desde el panel de gestión.
++          </audio>
++        </div>
++        <div>
++          <h2>Reserva</h2>
++          <label for="entrada">Fecha de entrada</label>
++          <input id="entrada" type="date">
++          <label for="salida">Fecha de salida</label>
++          <input id="salida" type="date">
++          <label for="huespedes">Huéspedes</label>
++          <select id="huespedes">
++            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
++            <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
++          </select>
++          <label for="nombre">Tu nombre</label>
++          <input id="nombre" type="text" placeholder="Nombre y apellidos">
++          <label for="notas">Notas (hora de llegada, peticiones...)</label>
++          <textarea id="notas" rows="4" placeholder="Cuéntanos cualquier necesidad especial"></textarea>
++          <div class="row" style="margin-top:12px">
++            <button onclick="reservar('Dúplex en Montanejos · Acceso a Fuente de los Baños')">Reservar por WhatsApp</button>
++            <button class="secondary" onclick="alert('Próximamente: pasarela de pago propia sin comisiones.')">Pagar online (próximamente)</button>
++          </div>
++          <div class="section">
++            <h2>Ubicación</h2>
++            <iframe class="map" src="https://www.google.com/maps?q=Montanejos,+Spain&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
++            <p class="small">Te enviaremos rutas y restaurantes cercanos. Recuerda ducharte antes de entrar a las aguas termales.</p>
++          </div>
++        </div>
++      </div>
++      <div class="footer">GuestsValencia · Atención 7★ con Sandra IA · <a href="#" style="color:#8be9ff">Política de cancelación</a></div>
++    </div>
++  </div>
++  <script src="/assets/js/booking.js"></script>
++</body>
++</html>
+diff --git a/public/properties/mendez-nunez-47.html b/public/properties/mendez-nunez-47.html
+new file mode 100644
+index 0000000..c7626a0
+--- /dev/null
++++ b/public/properties/mendez-nunez-47.html
+@@ -0,0 +1,69 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>Habitaciones en Calle Méndez Núñez 47 · Valencia · GuestsValencia</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>Habitaciones en Calle Méndez Núñez 47 · Valencia</h1>
++      <p class="lead">Apartamento grande con 4 habitaciones privadas en el centro. Ideal para estancias cortas o medias, con check-in autónomo.</p>
++      <div class="chips" style="margin:10px 0 18px"><span class="chip">Centro de Valencia</span><span class="chip">Self check-in con caja de llaves</span><span class="chip">WiFi 600Mb</span></div>
++      <div class="gallery"><div><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Foto de Habitaciones en Calle Méndez Núñez 47 · Valencia"></div><div><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Foto de Habitaciones en Calle Méndez Núñez 47 · Valencia"></div><div><img src="https://images.unsplash.com/photo-1505691723518-36a0f673b3c5" alt="Foto de Habitaciones en Calle Méndez Núñez 47 · Valencia"></div><div><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" alt="Foto de Habitaciones en Calle Méndez Núñez 47 · Valencia"></div></div>
++      <div class="section grid grid-2">
++        <div>
++          <h2>Aspectos destacados</h2>
++          <ul><li>4 habitaciones independientes con cerradura.</li><li>Cocina compartida totalmente equipada.</li><li>Baños renovados y zonas comunes luminosas.</li><li>Check-in con caja de seguridad en portal.</li></ul>
++          <hr class="sep">
++          <h2>Qué incluye</h2>
++          <div class="chips"><span class="chip">Aire acondicionado</span><span class="chip">Calefacción</span><span class="chip">Cocina equipada</span><span class="chip">Lavadora</span><span class="chip">Smart TV</span><span class="chip">Espacio de trabajo</span></div>
++          <hr class="sep">
++          <h2>Normas y check-in</h2>
++          <ul><li>Recogida de llaves en caja de seguridad (código enviado el día de llegada).</li><li>Documento de identidad requerido para registro de viajeros.</li><li>Salida hasta las 11:00, entrada desde las 15:00 (flexible según disponibilidad).</li></ul>
++          <p class="small">Horario de silencio recomendado 23:00–08:00. Prohibidas fiestas. Respeto al vecindario.</p>
++          <hr class="sep">
++          <h2>Mensaje de bienvenida de Sandra</h2>
++          <p class="small">Pulsa play para escuchar instrucciones rápidas de llegada y consejos locales.</p>
++          <audio controls src="/assets/audio/sandra-bienvenida.mp3">
++            Tu navegador no soporta audio. Descarga el archivo desde el panel de gestión.
++          </audio>
++        </div>
++        <div>
++          <h2>Reserva</h2>
++          <label for="entrada">Fecha de entrada</label>
++          <input id="entrada" type="date">
++          <label for="salida">Fecha de salida</label>
++          <input id="salida" type="date">
++          <label for="huespedes">Huéspedes</label>
++          <select id="huespedes">
++            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
++            <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
++          </select>
++          <label for="nombre">Tu nombre</label>
++          <input id="nombre" type="text" placeholder="Nombre y apellidos">
++          <label for="notas">Notas (hora de llegada, peticiones...)</label>
++          <textarea id="notas" rows="4" placeholder="Cuéntanos cualquier necesidad especial"></textarea>
++          <div class="row" style="margin-top:12px">
++            <button onclick="reservar('Habitaciones en Calle Méndez Núñez 47 · Valencia')">Reservar por WhatsApp</button>
++            <button class="secondary" onclick="alert('Próximamente: pasarela de pago propia sin comisiones.')">Pagar online (próximamente)</button>
++          </div>
++          <div class="section">
++            <h2>Ubicación</h2>
++            <iframe class="map" src="https://www.google.com/maps?q=Valencia,+Spain&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
++            <p class="small">Ubicación exacta y código de caja enviados tras confirmar reserva.</p>
++          </div>
++        </div>
++      </div>
++      <div class="footer">GuestsValencia · Atención 7★ con Sandra IA · <a href="#" style="color:#8be9ff">Política de cancelación</a></div>
++    </div>
++  </div>
++  <script src="/assets/js/booking.js"></script>
++</body>
++</html>
+diff --git a/public/properties/villa-altea-hills.html b/public/properties/villa-altea-hills.html
+new file mode 100644
+index 0000000..42b2a00
+--- /dev/null
++++ b/public/properties/villa-altea-hills.html
+@@ -0,0 +1,69 @@
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>Villa en Mirador de Altea Hills · Lujo con vistas · GuestsValencia</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="/assets/css/base.css" />
++</head>
++<body>
++  <div class="container">
++    <div class="card">
++      <span class="badge">Reserva directa · Sin comisiones</span>
++      <h1>Villa en Mirador de Altea Hills · Lujo con vistas</h1>
++      <p class="lead">Villa de 2 habitaciones (hasta 6 pax con supletorias), terraza y piscina comunitaria en urbanización de lujo, vistas panorámicas al mar.</p>
++      <div class="chips" style="margin:10px 0 18px"><span class="chip">Vistas al mar</span><span class="chip">Piscina comunitaria</span><span class="chip">Barbacoa y paellero</span><span class="chip">Urbanización privada</span></div>
++      <div class="gallery"><div><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21" alt="Foto de Villa en Mirador de Altea Hills · Lujo con vistas"></div><div><img src="https://images.unsplash.com/photo-1489171078254-c3365d6e359f" alt="Foto de Villa en Mirador de Altea Hills · Lujo con vistas"></div><div><img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae" alt="Foto de Villa en Mirador de Altea Hills · Lujo con vistas"></div><div><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" alt="Foto de Villa en Mirador de Altea Hills · Lujo con vistas"></div></div>
++      <div class="section grid grid-2">
++        <div>
++          <h2>Aspectos destacados</h2>
++          <ul><li>Balcón y gran terraza con vistas a la bahía de Altea.</li><li>Piscina, barbacoa y paellero comunitarios.</li><li>Calle cerrada en urbanización de lujo; vivienda de 15 años.</li><li>Plataformas de streaming: Netflix, Apple TV, Amazon Prime y TV Extreme.</li></ul>
++          <hr class="sep">
++          <h2>Qué incluye</h2>
++          <div class="chips"><span class="chip">Aire acondicionado</span><span class="chip">Calefacción</span><span class="chip">Cocina completa</span><span class="chip">Lavavajillas</span><span class="chip">Smart TV</span><span class="chip">Microondas</span><span class="chip">Nevera</span></div>
++          <hr class="sep">
++          <h2>Normas y check-in</h2>
++          <ul><li>Self check-in con caja de llaves en la entrada.</li><li>Instrucciones detalladas enviadas por Sandra con vídeo de acceso.</li><li>Respeto a las normas de la comunidad; no se permiten fiestas.</li></ul>
++          <p class="small">Horario de silencio recomendado 23:00–08:00. Prohibidas fiestas. Respeto al vecindario.</p>
++          <hr class="sep">
++          <h2>Mensaje de bienvenida de Sandra</h2>
++          <p class="small">Pulsa play para escuchar instrucciones rápidas de llegada y consejos locales.</p>
++          <audio controls src="/assets/audio/sandra-bienvenida.mp3">
++            Tu navegador no soporta audio. Descarga el archivo desde el panel de gestión.
++          </audio>
++        </div>
++        <div>
++          <h2>Reserva</h2>
++          <label for="entrada">Fecha de entrada</label>
++          <input id="entrada" type="date">
++          <label for="salida">Fecha de salida</label>
++          <input id="salida" type="date">
++          <label for="huespedes">Huéspedes</label>
++          <select id="huespedes">
++            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
++            <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
++          </select>
++          <label for="nombre">Tu nombre</label>
++          <input id="nombre" type="text" placeholder="Nombre y apellidos">
++          <label for="notas">Notas (hora de llegada, peticiones...)</label>
++          <textarea id="notas" rows="4" placeholder="Cuéntanos cualquier necesidad especial"></textarea>
++          <div class="row" style="margin-top:12px">
++            <button onclick="reservar('Villa en Mirador de Altea Hills · Lujo con vistas')">Reservar por WhatsApp</button>
++            <button class="secondary" onclick="alert('Próximamente: pasarela de pago propia sin comisiones.')">Pagar online (próximamente)</button>
++          </div>
++          <div class="section">
++            <h2>Ubicación</h2>
++            <iframe class="map" src="https://www.google.com/maps?q=Altea,+Spain&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
++            <p class="small">VISTAS: mejor luz por la tarde. Te enviaremos recomendaciones de restaurantes en Altea Pueblo.</p>
++          </div>
++        </div>
++      </div>
++      <div class="footer">GuestsValencia · Atención 7★ con Sandra IA · <a href="#" style="color:#8be9ff">Política de cancelación</a></div>
++    </div>
++  </div>
++  <script src="/assets/js/booking.js"></script>
++</body>
++</html>
+-- 
+2.39.2
+
+
+From cb00839d6fe9cb3af8cd23ba492363e5c1cf207d Mon Sep 17 00:00:00 2001
+From: Demo <demo@example.com>
+Date: Wed, 27 Aug 2025 20:30:02 +0000
+Subject: [PATCH 2/2] feat(ia): activation panels for Sandra (text, voice,
+ avatar) + API stubs
+
+---
+ index.html | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+diff --git a/index.html b/index.html
+index 91b8391..57aa6b9 100644
+--- a/index.html
++++ b/index.html
+@@ -31,6 +31,46 @@
+       </div>
+ 
+       
++      <hr class="sep" />
++      <h2>Comunicaciones con Sandra (Texto · Voz · Avatar)</h2>
++      <div class="card" style="padding:16px;margin-top:12px">
++        <div class="chips" style="margin-bottom:12px">
++          <button class="chip" onclick="SandraUI.show('text')">Texto</button>
++          <button class="chip" onclick="SandraUI.show('voice')">Voz</button>
++          <button class="chip" onclick="SandraUI.show('avatar')">Avatar</button>
++        </div>
++
++        <!-- TEXT CHAT -->
++        <div id="panel-text" style="display:block">
++          <div id="chat-log" style="height:220px;overflow:auto;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-bottom:10px"></div>
++          <div class="row">
++            <input id="chat-input" placeholder="Escribe tu mensaje para Sandra..." style="flex:1" />
++            <button onclick="SandraAPI.sendText()">Enviar</button>
++          </div>
++        </div>
++
++        <!-- VOICE -->
++        <div id="panel-voice" style="display:none">
++          <p class="small">Mantén pulsado “Grabar” para hablar con Sandra. Se enviará audio al backend (stub) y responderá por voz (TTS Web Speech como fallback).</p>
++          <div class="row">
++            <button id="btn-rec" onmousedown="SandraAPI.startVoice()" onmouseup="SandraAPI.stopVoice()">🎙️ Grabar (mantén)</button>
++            <button class="secondary" onclick="SandraAPI.playTTS('Hola, soy Sandra. Sistema listo para pruebas.')" >Probar TTS</button>
++          </div>
++          <div id="voice-status" class="small" style="margin-top:8px"></div>
++        </div>
++
++        <!-- AVATAR -->
++        <div id="panel-avatar" style="display:none">
++          <p class="small">Vista previa del avatar (iframe). Configura <code>AVATAR_IFRAME_URL</code> en <code>sandra.js</code>.</p>
++          <iframe id="avatar-frame" style="width:100%;height:340px;border:1px solid rgba(255,255,255,.15);border-radius:12px" src="about:blank"></iframe>
++          <div class="row" style="margin-top:8px">
++            <button onclick="SandraAPI.loadAvatar()">Cargar Avatar</button>
++            <button class="secondary" onclick="SandraAPI.sendAvatarCommand('hola')">Enviar “hola”</button>
++          </div>
++        </div>
++      </div>
++
++      
+       <hr class="sep" />
+       <h2>Comunicaciones con Sandra (Texto · Voz · Avatar)</h2>
+       <div class="card" style="padding:16px;margin-top:12px">
+-- 
+2.39.2
+

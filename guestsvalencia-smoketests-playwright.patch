@@ -1,0 +1,144 @@
+From 9dec6db729ba81debd6925952cf7f586b2774c87 Mon Sep 17 00:00:00 2001
+From: Demo <demo@example.com>
+Date: Wed, 27 Aug 2025 21:08:19 +0000
+Subject: [PATCH] test(smoke): add Playwright smoke tests + GitHub Action
+
+---
+ .github/workflows/smoke-playwright.yml | 30 ++++++++++++++++++++++++
+ README.SMOKE.md                        |  3 +++
+ package.json                           | 12 ++++++++++
+ playwright.config.ts                   | 14 +++++++++++
+ tests/smoke.spec.ts                    | 32 ++++++++++++++++++++++++++
+ 5 files changed, 91 insertions(+)
+ create mode 100644 .github/workflows/smoke-playwright.yml
+ create mode 100644 README.SMOKE.md
+ create mode 100644 package.json
+ create mode 100644 playwright.config.ts
+ create mode 100644 tests/smoke.spec.ts
+
+diff --git a/.github/workflows/smoke-playwright.yml b/.github/workflows/smoke-playwright.yml
+new file mode 100644
+index 0000000..5dfa84a
+--- /dev/null
++++ b/.github/workflows/smoke-playwright.yml
+@@ -0,0 +1,30 @@
++name: E2E Smoke (Playwright)
++
++on:
++  workflow_dispatch:
++  push:
++    branches: [main]
++  pull_request:
++
++jobs:
++  smoke:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-node@v4
++        with:
++          node-version: 20
++      - name: Install deps
++        run: npm ci || npm i
++      - name: Install Playwright
++        run: npx playwright install --with-deps
++      - name: Run smoke tests (prod URL or preview)
++        env:
++          BASE_URL: ${{ secrets.SMOKE_BASE_URL }}
++        run: npm test
++      - name: Upload Playwright report
++        if: always()
++        uses: actions/upload-artifact@v4
++        with:
++          name: playwright-report
++          path: playwright-report
+diff --git a/README.SMOKE.md b/README.SMOKE.md
+new file mode 100644
+index 0000000..bb37fca
+--- /dev/null
++++ b/README.SMOKE.md
+@@ -0,0 +1,3 @@
++# Smoke tests (Playwright)
++- Configura `SMOKE_BASE_URL` en GitHub Actions Secrets con la URL publicada (p. ej., https://tuapp.vercel.app).
++- Para correr local: `BASE_URL=http://localhost:4173 npm test` y sirve el / (por ejemplo, con `npx serve .` o `npx vite preview`).
+\ No newline at end of file
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000..ca53e05
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,12 @@
++{
++  "name": "guestsvalencia-smoketests",
++  "private": true,
++  "scripts": {
++    "test": "npx playwright test",
++    "test:headed": "npx playwright test --headed",
++    "test:report": "npx playwright show-report"
++  },
++  "devDependencies": {
++    "@playwright/test": "^1.46.0"
++  }
++}
+\ No newline at end of file
+diff --git a/playwright.config.ts b/playwright.config.ts
+new file mode 100644
+index 0000000..5ac89b8
+--- /dev/null
++++ b/playwright.config.ts
+@@ -0,0 +1,14 @@
++import { defineConfig } from '@playwright/test';
++
++export default defineConfig({
++  timeout: 30000,
++  forbidOnly: true,
++  retries: 1,
++  use: {
++    baseURL: process.env.BASE_URL || 'http://localhost:4173',
++    trace: 'retain-on-failure',
++    screenshot: 'only-on-failure',
++    video: 'off'
++  },
++  reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]]
++});
+diff --git a/tests/smoke.spec.ts b/tests/smoke.spec.ts
+new file mode 100644
+index 0000000..73cacec
+--- /dev/null
++++ b/tests/smoke.spec.ts
+@@ -0,0 +1,32 @@
++import { test, expect } from '@playwright/test';
++
++test.describe('GuestsValencia – Smoke', () => {
++  test('Home loads with sections and links', async ({ page }) => {
++    await page.goto('/');
++    await expect(page.locator('text=GuestsValencia')).toBeVisible();
++    await expect(page.locator('text=Comunicaciones con Sandra')).toBeVisible();
++
++    // Property links
++    await expect(page.locator('a:has-text("Méndez Núñez 47")')).toBeVisible();
++    await expect(page.locator('a:has-text("Villa · Altea Hills")')).toBeVisible();
++    await expect(page.locator('a:has-text("Dúplex · Montanejos")')).toBeVisible();
++    await expect(page.locator('a:has-text("Apartamento · Bétera")')).toBeVisible();
++  });
++
++  test('Chat tabs switch (Texto/Voz/Avatar)', async ({ page }) => {
++    await page.goto('/');
++    await page.getByRole('button', { name: 'Voz' }).click();
++    await expect(page.locator('#panel-voice')).toBeVisible();
++    await page.getByRole('button', { name: 'Avatar' }).click();
++    await expect(page.locator('#panel-avatar')).toBeVisible();
++    await page.getByRole('button', { name: 'Texto' }).click();
++    await expect(page.locator('#panel-text')).toBeVisible();
++  });
++
++  test('Property page renders and WhatsApp button present', async ({ page }) => {
++    await page.goto('/public/properties/mendez-nunez-47.html');
++    await expect(page.getByText('Aspectos destacados')).toBeVisible();
++    const waBtn = page.getByRole('button', { name: /Reservar por WhatsApp/i });
++    await expect(waBtn).toBeVisible();
++  });
++});
+-- 
+2.39.2
+
