@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GuestsValencia · Alojamientos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <span class="badge">Reserva directa · Sin comisiones</span>
+      <h1>GuestsValencia</h1>
+      <p class="lead">Alojamientos en Valencia, Montanejos y Altea con llegada autónoma y atención 7★ por Sandra IA.</p>
+      <div class="chips">
+        <a class="chip" href="/public/properties/mendez-nunez-47.html">Méndez Núñez 47 · Valencia</a>
+        <a class="chip" href="/public/properties/villa-altea-hills.html">Villa · Altea Hills</a>
+        <a class="chip" href="/public/properties/duplex-montanejos.html">Dúplex · Montanejos</a>
+        <a class="chip" href="/public/properties/apartamento-betera.html">Apartamento · Bétera</a>
+      </div>
+
+      <hr class="sep" />
+      <h2>Contacto</h2>
+      <div class="row">
+        <input id="nombre" placeholder="Tu nombre" />
+        <input id="mensaje" placeholder="¿Cómo te ayudamos?" />
+        <button onclick="contacto()">Escribir por WhatsApp</button>
+      </div>
+
+      <hr class="sep" />
+      <h2>Comunicaciones con Sandra (Texto · Voz · Avatar)</h2>
+      <div class="chips" style="margin-bottom:12px">
+        <button class="chip" onclick="SandraUI.show('text')">Texto</button>
+        <button class="chip" onclick="SandraUI.show('voice')">Voz</button>
+        <button class="chip" onclick="SandraUI.show('avatar')">Avatar</button>
+      </div>
+
+      <!-- TEXT CHAT -->
+      <div id="panel-text" style="display:block">
+        <div id="chat-log" style="height:220px;overflow:auto;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-bottom:10px"></div>
+        <div class="row">
+          <input id="chat-input" placeholder="Escribe tu mensaje para Sandra..." style="flex:1" />
+          <button onclick="SandraAPI.sendText()">Enviar</button>
+        </div>
+      </div>
+
+      <!-- VOICE -->
+      <div id="panel-voice" style="display:none">
+        <p class="small">Mantén pulsado “Grabar” para hablar con Sandra. Se enviará audio al backend (stub) y responderá por voz (TTS Web Speech como fallback).</p>
+        <div class="row">
+          <button id="btn-rec" onmousedown="SandraAPI.startVoice()" onmouseup="SandraAPI.stopVoice()">🎙️ Grabar (mantén)</button>
+          <button class="secondary" onclick="SandraAPI.playTTS('Hola, soy Sandra. Sistema listo para pruebas.')">Probar TTS</button>
+        </div>
+        <div id="voice-status" class="small" style="margin-top:8px"></div>
+      </div>
+
+      <!-- AVATAR -->
+      <div id="panel-avatar" style="display:none">
+        <p class="small">Vista previa del avatar (iframe). Configura <code>AVATAR_IFRAME_URL</code> en <code>assets/js/config.js</code>.</p>
+        <iframe id="avatar-frame" style="width:100%;height:340px;border:1px solid rgba(255,255,255,.15);border-radius:12px" src="about:blank"></iframe>
+        <div class="row" style="margin-top:8px">
+          <button onclick="SandraAPI.loadAvatar()">Cargar Avatar</button>
+          <button class="secondary" onclick="SandraAPI.sendAvatarCommand('hola')">Enviar “hola”</button>
+        </div>
+      </div>
+
+      <div class="footer">Valencia Dancing Club SL · GuestsValencia</div>
+    </div>
+  </div>
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/booking.js"></script>
+  <script src="/assets/js/sandra.js"></script>
+</body>
+</html>
