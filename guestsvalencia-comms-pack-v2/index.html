@@ -1,0 +1,19 @@
+
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuestsValencia · Inicio</title>
+<link rel="stylesheet" href="/css/gv-theme.css">
+</head><body>
+<header class="top"><div class="row wrap"><div class="brand"><strong>GuestsValencia</strong><span class="pill">Direct Booking</span></div>
+<nav class="nav"><a class="btn" href="/listings.html">Alojamientos</a><a class="btn" href="/checkout.html">Checkout</a><a class="btn" href="/admin/cleaning.html">Limpieza</a><a class="btn wa" id="btnWA" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>
+
+<section class="wrap section"><h1 class="h1">Vive Valencia como local</h1><p class="ghost">Reserva directa, atención humana y recomendaciones auténticas.</p></section>
+
+<footer class="footer wrap">© <span id="y"></span> GuestsValencia</footer>
+
+<script src="/js/gv-config.js"></script>
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+const C = window.GV_CONFIG; document.getElementById('btnWA').href = 'https://wa.me/' + C.WHATSAPP_MAIN.replace(/\D/g,'') + '?text=' + encodeURIComponent('Hola, ¿me ayudas con una reserva?');
+</script>
+</body></html>

@@ -1,0 +1,60 @@
+
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limpieza · GuestsValencia</title>
+<link rel="stylesheet" href="/css/gv-theme.css">
+</head><body>
+<header class="top"><div class="row wrap"><div class="brand"><strong>GuestsValencia</strong><span class="pill">Limpieza</span></div>
+<nav class="nav"><a class="btn" href="/admin/">Admin</a><a class="btn" href="/listings.html">Alojamientos</a></nav></div></header>
+
+<section class="wrap section">
+  <h1 class="h1">Programación de limpieza</h1>
+  <p class="ghost">Llegadas/salidas próximas. Envía aviso por WhatsApp a Susana o Paloma.</p>
+</section>
+
+<section class="wrap">
+  <table class="table" id="tbl">
+    <thead><tr><th>Fecha</th><th>Alojamiento</th><th>Acción</th><th></th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<footer class="footer wrap">© <span id="y"></span> GuestsValencia</footer>
+
+<script src="/js/gv-config.js"></script>
+<script src="/js/gv-helpers.js"></script>
+<script>
+(function(){
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const C = window.GV_CONFIG;
+
+  // Demo: 6 tareas próximas (en real vendrán de tu backend /api/cleaning/next)
+  const tasks = [
+    { date: '2025-09-01 11:00', id:'cabanyal-3hab', action:'Salida → limpieza' },
+    { date: '2025-09-02 12:00', id:'mendez-hab-1', action:'Salida → limpieza' },
+    { date: '2025-09-03 15:00', id:'altea-hills', action:'Entrada → repaso' },
+    { date: '2025-09-04 11:30', id:'montanejos-duplex', action:'Salida → limpieza profunda' },
+    { date: '2025-09-05 10:00', id:'valencia-centro-2', action:'Salida → limpieza' },
+    { date: '2025-09-06 12:30', id:'montanejos-nuevo', action:'Salida → limpieza' }
+  ];
+
+  GV.loadListings().then(items => {
+    const byId = Object.fromEntries(items.map(x => [x.id, x]));
+    const tbody = document.querySelector('#tbl tbody');
+    tbody.innerHTML = tasks.map(t => {
+      const L = byId[t.id] || { title: t.id, area:'' };
+      const baseMsg = `Hola, limpieza para "${L.title}" (${L.area}) el ${t.date}. Acción: ${t.action}.`;
+      const sLink = GV.wa(C.WHATSAPP_SUSANA, baseMsg);
+      const pLink = GV.wa(C.WHATSAPP_PALOMA, baseMsg);
+      return `<tr>
+        <td>${t.date}</td><td>${L.title} <span class="badge">${L.area}</span></td><td>${t.action}</td>
+        <td>
+          <a class="btn wa" target="_blank" rel="noopener" href="${sLink}">Avisar Susana</a>
+          <a class="btn wa" target="_blank" rel="noopener" href="${pLink}">Avisar Paloma</a>
+        </td>
+      </tr>`;
+    }).join('');
+  });
+})();
+</script>
+</body></html>
