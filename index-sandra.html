@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GuestsValencia · Vive Valencia</title>
+
+  <!-- Conserva tus estilos/identidad visual -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="theme-color" content="#111111" />
+
+  <style>
+    /* Mini toques sin invadir tu CSS corporativo */
+    :root { --gv-ink:#0b0b0c; --gv-card:#111; --gv-line:#1e1e21; --gv-text:#eaeaea; --gv-accent:#00d4ff; }
+    body{ background:var(--gv-ink); color:var(--gv-text); -webkit-font-smoothing:antialiased; }
+    .wrap{ max-width:1200px; margin:0 auto; padding:24px; }
+    header.top{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 24px; border-bottom:1px solid var(--gv-line); position:sticky; top:0; backdrop-filter:saturate(120%) blur(6px); background:rgba(11,11,12,.55); }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .brand img{ height:36px; }
+    .nav{ display:flex; gap:14px; flex-wrap:wrap; }
+    .nav a{ color:var(--gv-text); text-decoration:none; opacity:.9 }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--gv-line); border-radius:12px; background:#121215; text-decoration:none; color:var(--gv-text); }
+    .btn:hover{ border-color:#333; }
+    .whatsapp{ border-color:#1f5f3a; }
+    .grid{ display:grid; gap:16px; }
+    .hero{ padding:48px 24px; border-bottom:1px solid var(--gv-line); background:linear-gradient(180deg, rgba(0,212,255,.06), transparent 60%); }
+    .hero h1{ font-size:clamp(28px, 4vw, 44px); margin:0 0 8px; }
+    .hero p{ opacity:.85; font-size:clamp(14px, 2.2vw, 18px); margin:0 0 18px; }
+    .cards{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card{ background:var(--gv-card); border:1px solid var(--gv-line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+    .card img{ width:100%; height:180px; object-fit:cover; background:#0e0e10; }
+    .card .pad{ padding:14px; display:flex; flex-direction:column; gap:8px; }
+    .pill{ display:inline-block; font-size:12px; padding:4px 8px; border:1px solid var(--gv-line); border-radius:999px; opacity:.9 }
+    .footer{ border-top:1px solid var(--gv-line); padding:24px; opacity:.8; font-size:14px; }
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; padding:2px 6px; border-radius:6px; border:1px solid var(--gv-line); background:#0e0f12; font-size:12px; }
+
+    /* Panel oculto para Prompt Maestro */
+    .drawer{ position:fixed; inset:0 auto 0 0; width:min(720px, 96vw); background:#0f0f12; border-right:1px solid #2a2a2f; transform:translateX(-102%); transition:transform .25s ease; z-index:40; display:flex; flex-direction:column; }
+    .drawer.open{ transform:translateX(0); }
+    .drawer header{ padding:14px 16px; border-bottom:1px solid #222; display:flex; align-items:center; gap:10px; justify-content:space-between; }
+    .drawer .inner{ padding:12px 16px; display:grid; gap:12px; }
+    textarea.prompt{ width:100%; min-height:48vh; background:#0b0b0c; border:1px solid #2a2a2f; border-radius:12px; color:#eaeaea; padding:12px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size:13px; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; }
+    .ghost{ opacity:.85; font-size:12px; }
+  </style>
+</head>
+<body>
+  <!-- Header con WhatsApp ya integrado -->
+  <header class="top">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="GuestsValencia" onerror="this.style.display='none'">
+      <strong>GuestsValencia</strong>
+      <span class="pill">Direct Booking</span>
+    </div>
+    <nav class="nav">
+      <a href="#alojamientos">Alojamientos</a>
+      <a href="#galeria">Galería</a>
+      <a href="#reservas">Reservas</a>
+      <a href="#contacto">Contacto</a>
+      <a class="btn whatsapp" id="btnWA" target="_blank" rel="noopener" href="#">WhatsApp</a>
+      <a class="btn" id="btnPrompt" title="Abrir Prompt Maestro (solo admin)"><span class="kbd">Ctrl</span>+<span class="kbd">M</span></a>
+    </nav>
+  </header>
+
+  <!-- Hero/Intro -->
+  <section class="hero wrap">
+    <h1>Vive Valencia <span style="color:var(--gv-accent)">como local</span></h1>
+    <p>Gestión profesional de apartamentos turísticos. Atención humana 24/7, check‑in sin fricción y recomendaciones auténticas de barrio.</p>
+    <div class="row">
+      <a class="btn" href="#alojamientos">Ver alojamientos</a>
+      <a class="btn" href="#reservas">Reservar ahora</a>
+    </div>
+  </section>
+
+  <!-- Alojamientos destacados (placeholders: se llenan desde /data/properties.json vía tu JS existente) -->
+  <section id="alojamientos" class="wrap grid">
+    <h2>Alojamientos</h2>
+    <div class="cards" id="cardsListings">
+      <!-- Las cards se renderizan dinámicamente por tu JS / API -->
+      <div class="card">
+        <img src="assets/hero/fake-valencia-1.jpg" alt="Valencia seafront" />
+        <div class="pad">
+          <div class="pill">El Cabanyal · 3 hab · 6 pax</div>
+          <strong>400m de la playa</strong>
+          <span class="ghost">Aire Acond. · WiFi · Check‑in 24/7</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/hero/fake-valencia-2.jpg" alt="Historic center" />
+        <div class="pad">
+          <div class="pill">Méndez Núñez · Habitación</div>
+          <strong>Habitaciones privadas · 2 pax</strong>
+          <span class="ghost">Cerca de Puerto y Oceanogràfic</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/hero/fake-valencia-3.jpg" alt="Montanejos" />
+        <div class="pad">
+          <div class="pill">Montanejos · Dúplex</div>
+          <strong>Vistas al Mijares · 8 pax</strong>
+          <span class="ghost">4 hab · 2 baños · Terraza</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria" class="wrap grid" style="margin-top:10px">
+    <h2>Galería</h2>
+    <div class="cards">
+      <div class="card"><img src="assets/hero/fake-valencia-4.jpg" alt=""></div>
+      <div class="card"><img src="assets/hero/fake-valencia-5.jpg" alt=""></div>
+      <div class="card"><img src="assets/hero/fake-valencia-6.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <!-- Reservas -->
+  <section id="reservas" class="wrap grid" style="margin-top:10px">
+    <h2>Reservas</h2>
+    <p class="ghost">Reserva directa y evita comisiones. Atención en español y portugués.</p>
+    <div class="row">
+      <a class="btn" href="/listings.html">Buscar alojamientos</a>
+      <a class="btn" href="/checkout.html">Ir al checkout</a>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="wrap grid" style="margin-top:10px">
+    <h2>Contacto</h2>
+    <p class="ghost">¿Dudas rápidas? Escríbenos por WhatsApp y te responde Sandra al momento.</p>
+    <div class="row">
+      <a class="btn whatsapp" id="btnWA2" target="_blank" rel="noopener" href="#">Abrir WhatsApp</a>
+      <a class="btn" href="mailto:info@guestsvalencia.es">info@guestsvalencia.es</a>
+    </div>
+  </section>
+
+  <footer class="footer wrap">
+    © <span id="y"></span> GuestsValencia · Direct Booking · <a href="/legal.html">Aviso legal</a> · <a href="/privacidad.html">Privacidad</a>
+  </footer>
+
+  <!-- Widget Sandra (mini CONNECTED) -->
+  <script src="/sandra-mini-connected.js"
+          defer
+          data-backend="https://guestsvalencia.es"
+          data-theme="auto"
+          data-pills="on"
+          data-model="gpt-4o-realtime-preview-2024-12-17"></script>
+
+  <!-- Config de WhatsApp (tu número público) -->
+  <script>
+    window.GV_BACKEND = window.GV_BACKEND || "https://guestsvalencia.es";
+    const WA_NUMBER = "+34611122334"; // fake temporal; cambia por el oficial cuando lo tengas
+    function wa(urlText="Hola Sandra, quiero reservar"){
+      const base = "https://wa.me/" + WA_NUMBER.replace(/\D/g,'');
+      return base + "?text=" + encodeURIComponent(urlText);
+    }
+    (function(){
+      const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
+      const a = document.getElementById('btnWA'); if (a) a.href = wa("Hola Sandra, ¿disponible del 10 al 13?");
+      const b = document.getElementById('btnWA2'); if (b) b.href = wa("Hola Sandra, necesito ayuda con una reserva");
+    })();
+  </script>
+
+  <!-- Prompt Maestro (oculto por defecto; abre con Ctrl+M o clic en botón "Prompt") -->
+  <aside class="drawer" id="drawer">
+    <header>
+      <strong>Prompt Maestro de Sandra</strong>
+      <div class="row">
+        <button class="btn" id="copyPrompt">Copiar</button>
+        <button class="btn" id="savePrompt">Guardar en servidor</button>
+        <button class="btn" id="closeDrawer">Cerrar</button>
+      </div>
+    </header>
+    <div class="inner">
+      <small class="ghost">Sugerencia: mantén este prompt en el servidor (archivo <code>data/sandra.json</code>) y edítalo desde el panel. Este editor permite copiarlo o guardarlo vía API.</small>
+      <textarea class="prompt" id="promptText"></textarea>
+      <div class="row">
+        <input id="backendUrl" placeholder="https://guestsvalencia.es" style="min-width:260px" />
+        <input id="adminKey" placeholder="ADMIN KEY (solo para guardar)" style="min-width:220px" />
+      </div>
+    </div>
+  </aside>
+
+  <script>
+  const PM_DEFAULT = String.raw`# SANDRA · Concierge AI para GuestsValencia (ES/PT)
+## Rol
+Eres la asistente principal de GuestsValencia. Atiendes huéspedes y coordinas tareas internas de limpieza y operaciones.
+Respondes en español (o portugués si detectas ese idioma). Tono: cercano, resolutivo y profesional; evita tecnicismos.
+
+## Identidad y marca
+- Mantén el estilo de la web: claro, amable, directo y con emojis sutiles cuando encajen (no abuses).
+- No uses reseñas ni puntajes; la estrategia actual **no muestra reseñas**.
+- Prioriza claridad en check-in, llaves, horarios y ubicación aproximada (sin direcciones exactas hasta confirmar reserva).
+
+## Capacidades
+1) **Búsqueda y recomendación** de alojamientos (similar a Airbnb): filtra por fechas, pax y zona (Cabanyal, Centro, Montanejos, Altea Hills).
+2) **Pre-reserva y reserva directa**: solicita la mínima info necesaria: fechas (llegada/salida), nº de personas, teléfono (E.164), email.
+3) **Políticas**: check-in 15:00–22:00; check-out 11:00–12:00; sin fiestas; silencio 08:00–22:00; mascotas no (salvo indicación contraria en ficha); fumadores no.
+4) **Pagos**: si el huésped confirma, genera enlace a /checkout.html con parámetros o instruye a pagar seguro en la web.
+5) **Limpieza**: coordina con Susana/Paloma vía WhatsApp (solo mensajes internos). Usa plantillas: 
+   - LISTO → marca tarea como completada.
+   - INCIDENCIA: <detalle> → registra incidencia y avisa a administración.
+6) **Soporte**: si hay bloqueo con micrófono, WebRTC o STT, guía al usuario (permisos, recargar, botón de play por política de autoplay).
+
+## Reglas
+- No prometas disponibilidad si no puedes consultar el backend; ofrece alternativas.
+- No compartas claves, tokens ni `ADMIN_KEY` jamás.
+- Si el precio no está definido, muestra un rango orientativo y remite a reserva directa para precio final.
+- Evita compartir dirección exacta hasta tener reserva confirmada.
+
+## Formato de salida
+- Respuestas breves, con bullets cuando ayude.
+- Incluye acciones claras: *“¿Fechas exactas y nº de personas?”* o *“Pulsa ‘Reservar ahora’ y completa el pago seguro”*.
+
+## Datos del inventario (resumen)
+- **Cabanyal 3 hab · 6 pax** (400 m playa, AC, WiFi)
+- **Méndez Núñez · 3 habitaciones privadas** (2 pax por hab.)
+- **Altea Hills · 2 hab + supletorias** (hasta 6 pax)
+- **Montanejos Dúplex · 4 hab / 2 baños · 8 pax** (terraza, vistas río)
+
+## Vías de contacto
+- WhatsApp de empresa (botón superior): gestión rápida y humana.
+- Email: info@guestsvalencia.es
+
+## Seguridad y privacidad
+- Pide teléfono en formato E.164 y email solo cuando sea necesario para confirmar o enviar documentación.
+- No expongas datos internos ni rutas administrativas.
+
+(Fin del prompt)`;
+
+  // Drawer
+  const drawer = document.getElementById('drawer');
+  const btn = document.getElementById('btnPrompt');
+  const ta = document.getElementById('promptText');
+  const backendInput = document.getElementById('backendUrl');
+  const keyInput = document.getElementById('adminKey');
+  const copyBtn = document.getElementById('copyPrompt');
+  const saveBtn = document.getElementById('savePrompt');
+  const closeBtn = document.getElementById('closeDrawer');
+
+  function openDrawer(){ drawer.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); }
+
+  // Abrir con Ctrl+M (admin) o pulsando el botón
+  let ctrl=false;
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Control') ctrl=true; if(ctrl && e.key.toLowerCase()==='m'){ e.preventDefault(); openDrawer(); } });
+  window.addEventListener('keyup', (e)=>{ if(e.key==='Control') ctrl=false; });
+  btn && btn.addEventListener('click', openDrawer);
+  closeBtn && closeBtn.addEventListener('click', closeDrawer);
+
+  // Carga del prompt (desde servidor si existe)
+  async function loadPrompt(){
+    try{
+      const r = await fetch('/data/sandra.json', {cache:'no-store'});
+      if(r.ok){
+        const j = await r.json();
+        ta.value = j.prompt || PM_DEFAULT;
+      } else {
+        ta.value = PM_DEFAULT;
+      }
+    }catch(e){
+      ta.value = PM_DEFAULT;
+    }
+  }
+  loadPrompt();
+
+  // Copiar al portapapeles
+  copyBtn?.addEventListener('click', async ()=>{
+    await navigator.clipboard.writeText(ta.value);
+    copyBtn.textContent = '¡Copiado!';
+    setTimeout(()=> copyBtn.textContent = 'Copiar', 900);
+  });
+
+  // Guardar en el servidor (vía API, requiere ADMIN KEY)
+  saveBtn?.addEventListener('click', async ()=>{
+    const base = (backendInput.value || window.location.origin).replace(/\/$/, '');
+    const key  = keyInput.value.trim();
+    if(!key){ alert('Pon tu ADMIN KEY'); return; }
+    const body = { prompt: ta.value };
+    try{
+      const r = await fetch(base + '/api/sandra/prompt', {
+        method:'PUT',
+        headers:{ 'Content-Type':'application/json', 'x-admin-key': key },
+        body: JSON.stringify(body)
+      });
+      if(r.ok){ alert('Guardado ✔'); }
+      else { alert('Error al guardar'); }
+    }catch(e){ alert('No se pudo guardar'); }
+  });
+  </script>
+
+  <!-- (Opcional) Endpoint de guardado (si no existe aún, añade en tu backend):
+  app.put('/api/sandra/prompt', ensureAuth, express.json(), (req,res)=>{
+    const s = require('fs');
+    const p = require('path').resolve(process.cwd(), 'data/sandra.json');
+    const curr = s.existsSync(p) ? JSON.parse(s.readFileSync(p,'utf8')||'{}') : {};
+    const next = { ...(curr||{}), prompt: (req.body?.prompt||'') };
+    s.mkdirSync(require('path').dirname(p), { recursive:true });
+    s.writeFileSync(p, JSON.stringify(next, null, 2), 'utf8');
+    res.json({ ok:true });
+  });
+  -->
+</body>
+</html>
