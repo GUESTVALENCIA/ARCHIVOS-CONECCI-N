@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin · Modos & Memoria</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;margin:0;background:#0b0b0c;color:#eaeaea}
+    header{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #222}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .grid{display:grid;gap:12px;padding:16px}
+    .card{background:#111;border:1px solid #222;border-radius:14px;padding:14px}
+    input,button,textarea{background:#0e0e10;border:1px solid #2a2a2f;color:#eaeaea;padding:10px 12px;border-radius:10px}
+    textarea{min-height:120px;width:100%}
+    button{cursor:pointer}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px 10px;border-bottom:1px solid #222}
+    small.muted{opacity:.8}
+    .ok{color:#79ffa1}
+    .warn{color:#ffd479}
+    .danger{color:#ff8b8b}
+    .pill{display:inline-block;font-size:12px;padding:4px 8px;border:1px solid #2a2a2f;border-radius:999px;opacity:.9}
+  </style>
+</head>
+<body>
+<header>
+  <div class="row">
+    <strong>Admin · Modos & Memoria</strong>
+    <span class="pill">ops / concierge / social</span>
+  </div>
+  <div class="row">
+    <input id="base" placeholder="https://guestsvalencia.es" style="min-width:260px">
+    <input id="key" placeholder="ADMIN KEY" style="min-width:200px">
+  </div>
+</header>
+
+<div class="grid">
+  <div class="card">
+    <div class="row">
+      <input id="subject" placeholder="whatsapp:+34612345678" style="min-width:260px">
+      <button id="load">Cargar</button>
+      <div id="status" class="row"></div>
+    </div>
+    <small class="muted">Sujeto = canal:ID. Ej: <code>whatsapp:+34....</code> o <code>email:foo@bar.com</code></small>
+  </div>
+
+  <div class="row">
+    <div class="card" style="flex:1">
+      <strong>Modo actual</strong>
+      <div class="row" style="margin-top:8px">
+        <button data-mode="ops">ops</button>
+        <button data-mode="concierge">concierge</button>
+        <button data-mode="social">social</button>
+      </div>
+      <div id="sess" style="margin-top:10px"><small class="muted">Cargar sesión…</small></div>
+    </div>
+
+    <div class="card" style="flex:1">
+      <strong>Facts (corto plazo)</strong>
+      <div class="row" style="margin-top:8px">
+        <input id="factKey" placeholder="ej. lang / pax_pref" style="min-width:160px">
+        <input id="factVal" placeholder="ej. es / 4">
+        <input id="factTTL" type="number" min="1" max="365" value="60" style="width:90px">
+        <button id="saveFact">Guardar fact</button>
+      </div>
+      <div id="facts" style="margin-top:10px"><small class="muted">—</small></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card" style="flex:1">
+      <strong>Perfil (largo plazo)</strong>
+      <textarea id="profileJson" placeholder='{"prefers_self_checkin": true}'></textarea>
+      <div class="row">
+        <button id="saveProfile">Guardar perfil</button>
+      </div>
+    </div>
+
+    <div class="card" style="flex:1">
+      <strong>RGPD</strong>
+      <div class="row" style="margin-top:8px">
+        <button id="exportMem">Exportar JSON</button>
+        <button id="forget" class="danger">Borrar memoria</button>
+      </div>
+      <pre id="exportOut" style="white-space:pre-wrap;background:#0e0e10;border:1px solid #2a2a2f;border-radius:10px;padding:10px;min-height:120px;overflow:auto"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+function h(id){return document.getElementById(id)}
+function headers(){ return { 'x-admin-key': h('key').value.trim(), 'Content-Type':'application/json' } }
+function base(){ return (h('base').value || window.location.origin).replace(/\/$/,'') }
+function subjEnc(){ return encodeURIComponent(h('subject').value.trim()) }
+
+async function loadSession(){
+  const r = await fetch(base() + '/api/modes/session/' + subjEnc(), { headers: headers() })
+  const j = await r.json().catch(()=>({}))
+  h('sess').innerHTML = j.ok ? (
+    '<div class="pill">modo: <strong>'+ (j.session?.mode||'-') +'</strong></div>' +
+    '<div class="pill">social_turns: '+ (j.session?.social_turns||0) +'</div>' +
+    '<div><small class="muted">'+ (j.session?.guidance||'') +'</small></div>'
+  ) : '<small class="warn">No disponible</small>'
+}
+
+async function setMode(mode){
+  const r = await fetch(base() + '/api/modes/mode/' + subjEnc(), {
+    method:'PUT', headers: headers(), body: JSON.stringify({ mode })
+  })
+  if (r.ok){ h('status').textContent = '✅ modo: '+mode; await loadSession(); }
+  else { h('status').textContent = '❌ error al cambiar modo'; }
+}
+
+async function loadFacts(){
+  const r = await fetch(base() + '/api/memory/facts/' + subjEnc(), { headers: headers() })
+  const j = await r.json().catch(()=>({}))
+  if (!j.ok){ h('facts').innerHTML='<small class="warn">Memory Addon no disponible</small>'; return }
+  const f = j.facts || {}
+  const rows = Object.entries(f).map(([k,v])=> `<tr><td>${k}</td><td>${(v?.value??'')}</td><td><small>${(v?.expires_at??'')}</small></td></tr>`).join('')
+  h('facts').innerHTML = '<table><thead><tr><th>key</th><th>value</th><th>expira</th></tr></thead><tbody>'+rows+'</tbody></table>'
+}
+
+async function saveFact(){
+  const key = h('factKey').value.trim(), value = h('factVal').value.trim(), ttl = Number(h('factTTL').value||60)
+  if(!key) return alert('Pon key')
+  const r = await fetch(base() + '/api/memory/facts/' + subjEnc(), {
+    method:'PUT', headers: headers(), body: JSON.stringify({ key, value, ttlDays: ttl })
+  })
+  h('status').textContent = r.ok ? '✅ fact guardado' : '❌ error al guardar fact'
+  await loadFacts()
+}
+
+async function loadProfile(){
+  const r = await fetch(base() + '/api/memory/profile/' + subjEnc(), { headers: headers() })
+  const j = await r.json().catch(()=>({}))
+  if (!j.ok){ h('profileJson').value='// Memory Addon no disponible'; return }
+  h('profileJson').value = JSON.stringify(j.profile || {}, null, 2)
+}
+
+async function saveProfile(){
+  try{
+    const obj = JSON.parse(h('profileJson').value || '{}')
+    const r = await fetch(base() + '/api/memory/profile/' + subjEnc(), {
+      method:'PUT', headers: headers(), body: JSON.stringify(obj)
+    })
+    h('status').textContent = r.ok ? '✅ perfil guardado' : '❌ error al guardar perfil'
+  }catch{ alert('JSON inválido') }
+}
+
+async function exportMem(){
+  const r = await fetch(base() + '/api/memory/export/' + subjEnc(), { headers: headers() })
+  const j = await r.json().catch(()=>({}))
+  if (!j.ok){ h('exportOut').textContent = 'Memory Addon no disponible'; return }
+  h('exportOut').textContent = JSON.stringify(j, null, 2)
+}
+
+async function forget(){
+  if(!confirm('¿Borrar toda la memoria de este sujeto?')) return
+  const r = await fetch(base() + '/api/memory/' + subjEnc(), { method:'DELETE', headers: headers() })
+  h('status').textContent = r.ok ? '✅ borrado' : '❌ error al borrar'
+  await loadFacts(); await loadProfile(); await loadSession(); h('exportOut').textContent = ''
+}
+
+h('load').onclick = async ()=>{ await loadSession(); await loadFacts(); await loadProfile(); }
+document.querySelectorAll('button[data-mode]').forEach(b=> b.onclick = ()=> setMode(b.dataset.mode))
+h('saveFact').onclick = saveFact
+h('saveProfile').onclick = saveProfile
+h('exportMem').onclick = exportMem
+h('forget').onclick = forget
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alojamientos · GuestsValencia</title>
+<link rel="stylesheet" href="/css/gv-theme.css">
+</head><body>
+<header class="top"><div class="row wrap"><div class="brand"><strong>GuestsValencia</strong><span class="pill">Catálogo</span></div>
+<nav class="nav"><a class="btn" href="/">Inicio</a><a class="btn wa" id="btnWA" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>
+
+<section class="wrap section">
+  <h1 class="h1">Alojamientos</h1>
+  <p class="ghost">Elige tu alojamiento. Reserva directa por WhatsApp sin comisiones.</p>
+</section>
+
+<section class="wrap grid">
+  <div class="cards" id="grid"></div>
+</section>
+
+<footer class="footer wrap">© <span id="y"></span> GuestsValencia</footer>
+
+<script src="/js/gv-config.js"></script>
+<script src="/js/gv-helpers.js"></script>
+<script>
+(function(){
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const C = window.GV_CONFIG;
+  const wa = document.getElementById('btnWA'); if (wa) wa.href = GV.wa(C.WHATSAPP_MAIN, 'Hola, me ayudas con una reserva?');
+  GV.loadListings().then(items => {
+    document.getElementById('grid').innerHTML = items.map(GV.card).join('');
+  });
+})();
+</script>
+</body></html>

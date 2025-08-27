@@ -1,0 +1,113 @@
+[
+  {
+    "id": "cabanyal-3hab",
+    "title": "El Cabanyal \u00b7 400m de la playa",
+    "area": "Cabanyal",
+    "summary": "3 hab \u00b7 6 pax",
+    "cover": "assets/hero/fake-valencia-1.jpg",
+    "amenities": [
+      "AC",
+      "WiFi",
+      "Check\u2011in 24/7"
+    ],
+    "price": 95
+  },
+  {
+    "id": "mendez-hab-1",
+    "title": "M\u00e9ndez N\u00fa\u00f1ez \u00b7 Habitaci\u00f3n 1",
+    "area": "Poblados mar\u00edtimos",
+    "summary": "2 pax \u00b7 ba\u00f1o compartido",
+    "cover": "assets/hero/fake-valencia-2.jpg",
+    "amenities": [
+      "Lavadora",
+      "Cerca Puerto",
+      "Transporte 600m"
+    ],
+    "price": 35
+  },
+  {
+    "id": "mendez-hab-2",
+    "title": "M\u00e9ndez N\u00fa\u00f1ez \u00b7 Habitaci\u00f3n 2",
+    "area": "Poblados mar\u00edtimos",
+    "summary": "2 pax \u00b7 ba\u00f1o compartido",
+    "cover": "assets/hero/fake-valencia-3.jpg",
+    "amenities": [
+      "Ventilador",
+      "Cerca Oceanogr\u00e0fic"
+    ],
+    "price": 35
+  },
+  {
+    "id": "mendez-hab-3",
+    "title": "M\u00e9ndez N\u00fa\u00f1ez \u00b7 Habitaci\u00f3n 3",
+    "area": "Poblados mar\u00edtimos",
+    "summary": "2 pax \u00b7 balc\u00f3n",
+    "cover": "assets/hero/fake-valencia-4.jpg",
+    "amenities": [
+      "Balc\u00f3n",
+      "Transporte 550m"
+    ],
+    "price": 39
+  },
+  {
+    "id": "altea-hills",
+    "title": "Altea Hills \u00b7 Vista Mediterr\u00e1neo",
+    "area": "Altea Hills",
+    "summary": "2 hab + supletorias \u00b7 6 pax",
+    "cover": "assets/hero/fake-valencia-5.jpg",
+    "amenities": [
+      "Vistas",
+      "AC",
+      "Piscina comunitaria"
+    ],
+    "price": 140
+  },
+  {
+    "id": "montanejos-duplex",
+    "title": "Montanejos \u00b7 D\u00faplex 200m r\u00edo",
+    "area": "Montanejos",
+    "summary": "4 hab \u00b7 2 ba\u00f1os \u00b7 8 pax",
+    "cover": "assets/hero/fake-valencia-6.jpg",
+    "amenities": [
+      "Terraza",
+      "Vistas al r\u00edo"
+    ],
+    "price": 120
+  },
+  {
+    "id": "valencia-centro-1",
+    "title": "Centro Hist\u00f3rico \u00b7 Loft",
+    "area": "Centro",
+    "summary": "1 hab \u00b7 3 pax",
+    "cover": "assets/hero/fake-valencia-7.jpg",
+    "amenities": [
+      "A/C",
+      "Ascensor"
+    ],
+    "price": 80
+  },
+  {
+    "id": "valencia-centro-2",
+    "title": "Ruzafa \u00b7 Dise\u00f1o",
+    "area": "Ruzafa",
+    "summary": "2 hab \u00b7 4 pax",
+    "cover": "assets/hero/fake-valencia-8.jpg",
+    "amenities": [
+      "Pet\u2011friendly",
+      "Caf\u00e9s y vida nocturna"
+    ],
+    "price": 95
+  },
+  {
+    "id": "montanejos-nuevo",
+    "title": "Montanejos \u00b7 Piso Nuevo",
+    "area": "Montanejos",
+    "summary": "3 hab \u00b7 6 pax",
+    "cover": "assets/hero/fake-valencia-9.jpg",
+    "amenities": [
+      "Vistas monta\u00f1a",
+      "Parking"
+    ],
+    "price": 110
+  }
+]

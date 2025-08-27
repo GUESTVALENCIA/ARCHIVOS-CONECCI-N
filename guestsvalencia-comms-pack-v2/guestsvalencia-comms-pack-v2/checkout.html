@@ -1,0 +1,66 @@
+
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout · GuestsValencia</title>
+<link rel="stylesheet" href="/css/gv-theme.css">
+</head><body>
+<header class="top"><div class="row wrap"><div class="brand"><strong>GuestsValencia</strong><span class="pill">Checkout</span></div>
+<nav class="nav"><a class="btn" href="/listings.html">Volver a alojamientos</a><a class="btn wa" id="btnWA" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>
+
+<section class="wrap section">
+  <h1 class="h1" id="title">Checkout</h1>
+  <div class="notice" id="meta"></div>
+</section>
+
+<section class="wrap section">
+  <h2 class="h2">Datos de la reserva</h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    <div><label>Entrada</label><br><input id="in" type="date"></div>
+    <div><label>Salida</label><br><input id="out" type="date"></div>
+    <div><label>Personas</label><br><input id="pax" type="number" min="1" max="10" value="2"></div>
+    <div><label>Nombre</label><br><input id="name" placeholder="Tu nombre"></div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="h2">Confirmación</h2>
+  <p class="ghost">Confirmaremos por WhatsApp y te enviaremos instrucciones de check‑in.</p>
+  <div class="row">
+    <a class="btn wa" id="btnConfirm" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+  </div>
+</section>
+
+<footer class="footer wrap">© <span id="y"></span> GuestsValencia</footer>
+
+<script src="/js/gv-config.js"></script>
+<script src="/js/gv-helpers.js"></script>
+<script>
+(function(){
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const C = window.GV_CONFIG;
+  const waTop = document.getElementById('btnWA'); if (waTop) waTop.href = GV.wa(C.WHATSAPP_MAIN, 'Hola, quiero confirmar una reserva');
+
+  function q(k){ return new URLSearchParams(location.search).get(k) }
+  let current = null;
+
+  GV.loadListings().then(items => {
+    current = items.find(x => x.id === q('lid')) || items[0];
+    if (!current) return;
+    document.title = 'Checkout · ' + current.title;
+    document.getElementById('title').textContent = current.title;
+    document.getElementById('meta').textContent = `${current.area} · ${current.summary} · desde ${current.price}€/noche`;
+  });
+
+  document.getElementById('btnConfirm').addEventListener('click', (e)=>{
+    e.preventDefault();
+    const lid = q('lid') || (current && current.id) || '';
+    const name = document.getElementById('name').value || '';
+    const inD = document.getElementById('in').value || '';
+    const outD = document.getElementById('out').value || '';
+    const pax = document.getElementById('pax').value || '2';
+    const msg = `Hola, quiero reservar: ${current?current.title:lid}%0AFechas: ${inD} → ${outD}%0APersonas: ${pax}%0ANombre: ${name}`;
+    window.open(GV.wa(C.WHATSAPP_MAIN, decodeURIComponent(msg)), '_blank', 'noopener');
+  });
+})();
+</script>
+</body></html>
