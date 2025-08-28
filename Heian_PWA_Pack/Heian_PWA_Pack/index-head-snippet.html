@@ -1,0 +1,22 @@
+<!-- Heian PWA Essentials -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0ea5e9">
+
+<!-- iOS standalone -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Heian">
+<!-- Optional splash via CSS (Safari shows white until your app draws UI) -->
+<style>
+/* Basic splash placeholder while app mounts */
+@supports (-webkit-touch-callout: none) {
+  body.pwa-splash::before {
+    content: "Heian";
+    position: fixed; inset: 0; display: grid; place-items: center;
+    background: linear-gradient(135deg,#0EA5E9,#2563EB);
+    color: #fff; font: 700 32px/1.2 -apple-system, Inter, sans-serif;
+    letter-spacing: .5px;
+  }
+}
+</style>
