@@ -1,0 +1,13 @@
+Asunto: Confirmación de reserva - {{alojamiento}} / {{fecha_in}}–{{fecha_out}}
+
+Hola {{nombre}},
+
+¡Gracias por elegir GuestsValencia! Aquí tienes tu resumen:
+- Alojamiento: {{alojamiento}}
+- Fechas: {{fecha_in}}–{{fecha_out}}
+- Llegada autónoma: te enviaremos el código 24h antes.
+
+¿Necesitas transporte o late check-in? Responde a este email y te ayudamos.
+
+Un abrazo,
+Sandra — GuestsValencia
