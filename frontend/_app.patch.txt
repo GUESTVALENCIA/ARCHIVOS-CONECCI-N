@@ -1,0 +1,16 @@
+// ⬇️ Añade esto en pages/_app.tsx
+import dynamic from 'next/dynamic';
+import { useAdminUnlockHotkey } from '../hooks/useAdminUnlockHotkey';
+const AdminUnlockModal = dynamic(() => import('../components/AdminUnlockModal'), { ssr: false });
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  // ...lo que ya tengas arriba (registro SW, estilos, etc.)
+  const { open, setOpen } = useAdminUnlockHotkey();
+
+  return (
+    <>
+      <Component {...pageProps} />
+      <AdminUnlockModal open={open} onClose={() => setOpen(false)} />
+    </>
+  );
+}

@@ -1,35 +1,20 @@
-# GV Admin Override Addon
+# Admin Global Hotkey Addon
 
-Desbloquea **voz + avatar** solo para administradores/propietarios sin depender de una reserva activa.
+## Qué hace
+- **Atajo universal** `Ctrl+Shift+U` → abre el **Admin Unlock Modal** en **cualquier página** (no visible al público).
+- **Modal** `AdminUnlockModal` → te autentica como **admin premium** con email whitelisted + código secreto (cookie HttpOnly).
+- **Instrucciones Sandra** en Realtime → adiós a mensajes predeterminados y lemas repetidos.
 
-## Backend (secure+admin)
-Usa `backend/realtime-webrtc-bridge.secure.admin.js` como entrypoint en lugar del secure normal.
+## Integración (Frontend)
+1. Copia a tu repo:
+   - `frontend/components/AdminUnlockModal.tsx`
+   - `frontend/hooks/useAdminUnlockHotkey.ts`
+2. En `pages/_app.tsx`, añade el bloque del archivo `_app.patch.txt` (import dinámico del modal + hook del hotkey).
 
-### Variables de entorno
-Añade a tu `.env`:
-```
-ADMIN_EMAILS=claytis33@gmail.com
-ADMIN_OVERRIDE_CODE=<código_largo_y_secreto>
-```
-- `ADMIN_EMAILS`: lista de emails permitidos (separados por coma).
-- `ADMIN_OVERRIDE_CODE`: código que debes introducir junto con el email para emitir el JWT admin (24h).
+## Integración (Backend)
+- Si usas `realtime-webrtc-bridge.secure.admin.js`, aplica el parche del archivo:
+  - `backend/realtime-session.patch.txt` → añade el campo **instructions** en el body de `/v1/realtime/sessions`.
 
-### Endpoint
-```
-POST /api/auth/admin-override
-Body: { "email": "you@example.com", "code": "EL-CODIGO" }
-Cookies: Set-Cookie: gv_session=...; HttpOnly; Secure; SameSite=Strict
-```
-
-## Frontend
-Incluye la página oculta **/admin/unlock** y el componente `AdminUnlock`:
-- Ruta: `pages/admin/unlock.tsx`
-- Componente: `components/AdminUnlock.tsx`
-
-Cuando completes el formulario, el backend colocará una cookie **HttpOnly** con `role=admin` y `tier=premium`. El UI recargará y `useVoiceEntitlement` debe dar acceso completo (si no lo hacía ya, asegúrate de tratar `role==='admin'` como full access).
-
-## Consejos de seguridad
-- Mantén `ADMIN_OVERRIDE_CODE` fuera del repo (solo en `.env` del servidor).
-- Añade 2FA real en cuanto puedas (OTP/TOTP) o restringe IP si procede.
-- No enlaces `/admin/unlock` en la navegación pública.
-- Revoque acceso borrando cookie o rotando `JWT_SECRET` con el script del Security Addon.
+## Consejo
+- Mantén `ADMIN_EMAILS` y `ADMIN_OVERRIDE_CODE` sólo en el `.env` del servidor.
+- Si quieres, cambiamos el hotkey; también puedo añadir gesto táctil oculto en PWA (triple tap en logo) sólo para admin.
