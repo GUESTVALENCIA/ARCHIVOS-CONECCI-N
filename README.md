@@ -1,9 +1,18 @@
-# Nginx Privacy Pack — Sandra OTA
+# OTA Deploy Script Pack
 
-1) Copia `nginx/download.guestsvalencia.es.conf` a `/etc/nginx/sites-available/` y habilítalo con un symlink a `sites-enabled/`.
-2) Crea el archivo de contraseñas siguiendo `scripts/HTPASSWD.md`.
-3) Asegúrate de tener certificados en `/etc/letsencrypt/live/download.guestsvalencia.es/` (o ajusta rutas).
-4) Coloca el kit Ad Hoc en `/var/www/sandra` (ver `INDEX_HINT.txt`).
-5) `nginx -t && systemctl reload nginx`.
+Script automatizado para subir tu IPA, generar el manifest, parchear index.html y desplegar Nginx ultra-privado.
 
-Incluye: Basic Auth + (opcional) allowlist IP + headers anti-indexado + rate limiting.
+## Uso
+```bash
+sudo ./scripts/deploy_ota.sh   --domain download.guestsvalencia.es   --ipa /ruta/Sandra.ipa   --bundle es.guestsvalencia.sandra   --version 1.0.0   --title "Sandra"   --basic-auth-user admin   --basic-auth-pass "contraseña-super-segura"   --icons /ruta/a/icons   --allow-ip 203.0.113.15   --allow-ip 198.51.100.27
+```
+
+El script:
+- Crea `/var/www/sandra` (si no existe).
+- Copia `Sandra.ipa` y (opcional) iconos.
+- Genera `manifest.plist` desde plantilla.
+- Parchea `index.html` con la URL del manifest.
+- Crea/habilita el vhost Nginx con Basic Auth y allowlist (opcional).
+- Recarga Nginx.
+
+> Requiere: Nginx + Certbot (TLS) + `apache2-utils` para htpasswd.
