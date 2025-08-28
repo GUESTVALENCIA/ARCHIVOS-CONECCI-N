@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Sandra",
+    "slug": "sandra-mobile",
+    "scheme": "sandra",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#0ea5e9"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "es.guestsvalencia.sandra",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Sandra usa tu micr\u00f3fono para conversaciones de voz.",
+        "NSCameraUsageDescription": "Para adjuntar im\u00e1genes si lo permites."
+      }
+    },
+    "android": {
+      "package": "es.guestsvalencia.sandra",
+      "permissions": [
+        "RECORD_AUDIO",
+        "INTERNET",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "plugins": [
+      "expo-av",
+      "expo-secure-store"
+    ]
+  }
+}
