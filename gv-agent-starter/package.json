@@ -1,0 +1,11 @@
+{
+  "name": "gv-agent-starter",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w frontend & npm run dev -w backend"
+  }
+}

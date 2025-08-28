@@ -1,0 +1,42 @@
+{
+  "company": "GuestsValencia",
+  "legal_name": "Valencia Dancing Club SL",
+  "properties": {
+    "Mendez Nunez 47, Valencia": {
+      "type": "apartment-rooms",
+      "notes": "4 habitaciones alquiladas por separado, llaves en caja de seguridad"
+    },
+    "Altea Hills (Alicante, Valencia)": {
+      "type": "villa",
+      "capacity": 6,
+      "amenities": [
+        "balc\u00f3n",
+        "terraza",
+        "piscina comunitaria",
+        "barbacoa",
+        "paellero",
+        "wifi",
+        "Netflix",
+        "Apple TV",
+        "Prime"
+      ],
+      "access": "caja de seguridad",
+      "views": "panor\u00e1micas a playa de Altea"
+    },
+    "Duplex Montanejos": {
+      "type": "duplex",
+      "perk": "Acceso incluido a Fuente de los Ba\u00f1os (recoger planillas en turismo)",
+      "access": "apertura remota + cerradura digital por c\u00f3digo"
+    }
+  },
+  "cleaning_contacts": {
+    "Valencia": "Susana",
+    "Montanejos": "Paloma"
+  },
+  "negotiation_policy": "Aplicar ahorro de comisiones OTA + 3% en web propia",
+  "wellbeing": [
+    "yoga",
+    "pilates",
+    "mindfulness"
+  ]
+}
