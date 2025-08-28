@@ -1,0 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = "dist"          # solo si tu build genera /dist
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@netlify/blobs","@netlify/neon"]
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
