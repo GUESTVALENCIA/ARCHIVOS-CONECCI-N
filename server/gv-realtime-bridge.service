@@ -1,0 +1,18 @@
+[Unit]
+Description=GuestsValencia Realtime Voice Bridge
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/opt/gv-realtime/.env
+WorkingDirectory=/opt/gv-realtime
+ExecStart=/usr/bin/node realtime-webrtc-bridge.js
+Restart=always
+RestartSec=3
+User=www-data
+Group=www-data
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

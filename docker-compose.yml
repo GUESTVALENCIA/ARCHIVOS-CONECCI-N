@@ -1,33 +1,15 @@
 version: "3.9"
 services:
-  api:
-    build: ./sandra-ultra-backend
-    container_name: sandra-ultra-backend
+  gv-realtime-bridge:
+    build: ./backend
+    container_name: gv-realtime-bridge
+    restart: unless-stopped
     env_file:
-      - ./sandra-ultra-backend/.env
-    restart: unless-stopped
-    networks:
-      - web
-
-  caddy:
-    image: caddy:2-alpine
-    container_name: caddy
-    depends_on:
-      - api
+      - ./backend/.env
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    restart: unless-stopped
-    networks:
-      - web
-
-networks:
-  web:
-
-volumes:
-  caddy_data:
-  caddy_config:
+      - "8787:8787"
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "-", "http://localhost:8787/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
