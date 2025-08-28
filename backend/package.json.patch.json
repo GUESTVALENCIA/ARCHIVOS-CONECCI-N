@@ -1,0 +1,7 @@
+{
+  "add_to_dependencies": {
+    "helmet": "^7.1.0",
+    "cookie-parser": "^1.4.6"
+  },
+  "notes": "A\u00f1ade estas dependencias a tu package.json y usa realtime-webrtc-bridge.secure.js en lugar del original."
+}
