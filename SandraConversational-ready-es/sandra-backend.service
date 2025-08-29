@@ -1,0 +1,26 @@
+[Unit]
+Description=Sandra Conversational Backend (Express + WS)
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sandra
+Group=sandra
+WorkingDirectory=/opt/sandra-backend
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/sandra-backend/.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/sandra-backend
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
