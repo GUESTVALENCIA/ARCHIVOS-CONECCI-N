@@ -1,15 +1,3 @@
-import type { Metadata } from 'next';
-export const metadata: Metadata = {
-  title: 'Propietarios | GuestsValencia — Gestión integral y transparente',
-  description: 'Planes 15%/20% turístico, 12% temporada y renta mensual garantizada. Tecnología PropTech, check‑in autónomo y Sandra IA 24/7. Solicita valoración gratuita.',
-  openGraph: {
-    title: 'Propietarios | GuestsValencia',
-    description: 'Gestión integral con tecnología PropTech y hospitalidad 7★.',
-    type: 'website',
-    url: '/propietarios'
-  }
-};
-
 'use client';
 import React from 'react';
 import Link from 'next/link';
@@ -89,7 +77,7 @@ const badges = [
   'App de propietario: reservas, ingresos y avisos en tiempo real',
   'Negociación en tiempo real y venta directa sin comisiones de OTA en web propia',
   'Bienestar para huéspedes: mindfulness, yoga y pilates (planes VIP)',
-  'Plan de llegada multimedia por WhatsApp (rutas y horarios, opciones)',
+  'Plan de llegada multimedia por WhatsApp (rutas, horarios, opciones)',
 ];
 
 export default function Page() {

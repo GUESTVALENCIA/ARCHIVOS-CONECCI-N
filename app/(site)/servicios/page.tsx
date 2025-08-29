@@ -1,15 +1,3 @@
-import type { Metadata } from 'next';
-export const metadata: Metadata = {
-  title: 'Servicios | GuestsValencia — Suite PropTech & gestión 7★',
-  description: 'Comercialización, Revenue Management, Operativa, Atención 24/7, Tecnología PropTech, Asesoría legal y Experiencias.',
-  openGraph: {
-    title: 'Servicios | GuestsValencia',
-    description: 'Cobertura completa para alquiler turístico y de temporada.',
-    type: 'website',
-    url: '/servicios'
-  }
-};
-
 'use client';
 import React from 'react';
 import Link from 'next/link';
