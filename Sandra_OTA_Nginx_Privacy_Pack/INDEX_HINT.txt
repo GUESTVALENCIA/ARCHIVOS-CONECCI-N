@@ -1,0 +1,12 @@
+# Estructura esperada en /var/www/sandra
+
+/var/www/sandra/
+ ├─ index.html           # usa itms-services://?action=download-manifest&url=MANIFEST_URL
+ ├─ manifest.plist       # apunta a la URL del IPA
+ ├─ Sandra.ipa           # firmado Ad Hoc con UDIDs correctos
+ └─ assets/
+     ├─ icon57.png
+     └─ icon512.png
+
+# Cambia __MANIFEST_URL__ dentro de index.html por la ruta pública de tu manifest, por ejemplo:
+#   https://download.guestsvalencia.es/manifest.plist
