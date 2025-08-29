@@ -1,29 +1,48 @@
+import type { Metadata } from 'next';
+
+const title = 'Propietarios | GuestsValencia — Gestión integral y transparente';
+const description = 'Planes 15%/20% turístico, 12% temporada y renta mensual garantizada. Tecnología PropTech, check-in autónomo y Sandra IA 24/7.';
+const ogImage = '/images/og-default.svg';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  robots: { index: true, follow: true },
+  openGraph: {
+    title,
+    description,
+    type: 'website',
+    url: '/propietarios',
+    images: [{ url: ogImage, width: 1200, height: 630, alt: 'GuestsValencia Propietarios' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [ogImage],
+  },
+  alternates: {
+    canonical: '/propietarios',
+  },
+};
+
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const WhatsAppFloat = dynamic(() => import('@/components/ui/WhatsAppFloat'), { ssr: false });
 
 const plans = [
-  {
-    id: 'turistico-esencial',
-    name: 'Turístico Esencial',
-    price: '15% por reserva',
-    sub: 'IVA no incluido · + gastos de limpieza',
-    bullets: [
+  { id: 'turistico-esencial', name: 'Turístico Esencial', price: '15% por reserva', sub: 'IVA no incluido · + gastos de limpieza', bullets: [
       'Optimización profesional del anuncio',
       'Estrategia de precios (revenue) dinámica',
       'Gestión integral de reservas',
-      'Check‑in / Check‑out',
+      'Check-in / Check-out',
       'Limpieza profesional',
       'Mantenimiento básico',
-    ],
-    cta: 'Solicitar información',
-  },
-  {
-    id: 'turistico-premium',
-    name: 'Turístico Premium',
-    price: '20% por reserva',
-    sub: 'IVA no incluido · + gastos de limpieza',
-    bullets: [
+    ], cta: 'Solicitar información' },
+  { id: 'turistico-premium', name: 'Turístico Premium', price: '20% por reserva', sub: 'IVA no incluido · + gastos de limpieza', bullets: [
       'Todo lo de Esencial, más:',
       'Amenities premium',
       'Reportaje fotográfico profesional',
@@ -33,31 +52,16 @@ const plans = [
       'Instalación Smart Lock',
       'Revisiones de calidad',
       '2 limpiezas adicionales incluidas',
-    ],
-    highlight: true,
-    cta: 'Solicitar información',
-  },
-  {
-    id: 'temporada',
-    name: 'De Temporada (Media estancia)',
-    price: '12% por reserva',
-    sub: 'IVA no incluido · + gastos de limpieza · Estancias > 27 días',
-    bullets: [
+    ], highlight: true, cta: 'Solicitar información' },
+  { id: 'temporada', name: 'De Temporada (Media estancia)', price: '12% por reserva', sub: 'IVA no incluido · + gastos de limpieza · Estancias > 27 días', bullets: [
       'Estrategia específica para 1–11 meses',
       'Selección de perfil inquilino',
       'Gestión de reservas y cobros',
-      'Check‑in / Check‑out',
+      'Check-in / Check-out',
       'Limpieza y coordinación',
       'Mantenimiento durante la estancia',
-    ],
-    cta: 'Solicitar información',
-  },
-  {
-    id: 'renta-mensual',
-    name: 'Renta Mensual (garantizada)',
-    price: 'Importe mensual garantizado',
-    sub: 'IVA no incluido · + gastos de limpieza',
-    bullets: [
+    ], cta: 'Solicitar información' },
+  { id: 'renta-mensual', name: 'Renta Mensual (garantizada)', price: 'Importe mensual garantizado', sub: 'IVA no incluido · + gastos de limpieza', bullets: [
       'Ingresos fijos cada mes',
       'Cobros puntuales a principio de mes',
       'Mayor ingreso que alquiler a largo plazo',
@@ -65,9 +69,7 @@ const plans = [
       'Mantenimientos incluidos',
       'Suministros incluidos',
       'Una sola factura mensual',
-    ],
-    cta: 'Solicitar información',
-  },
+    ], cta: 'Solicitar información' },
 ];
 
 const badges = [
@@ -77,13 +79,13 @@ const badges = [
   'App de propietario: reservas, ingresos y avisos en tiempo real',
   'Negociación en tiempo real y venta directa sin comisiones de OTA en web propia',
   'Bienestar para huéspedes: mindfulness, yoga y pilates (planes VIP)',
-  'Plan de llegada multimedia por WhatsApp (rutas, horarios, opciones)',
+  'Plan de llegada multimedia por WhatsApp (rutas y horarios, opciones)',
 ];
 
 export default function Page() {
+  const waMessage = 'Hola, quiero valorar mi propiedad para gestión con GuestsValencia.';
   return (
     <main className="min-h-screen">
-      {/* HERO */}
       <section className="container mx-auto px-4 py-16">
         <div className="grid gap-8 lg:grid-cols-2 items-center">
           <div>
@@ -92,7 +94,7 @@ export default function Page() {
             <p className="mt-4 text-muted-foreground max-w-xl">Maximizamos tus ingresos con tecnología PropTech y hospitalidad 7★. Operativa completa, transparencia total y atención multilingüe con <strong>Sandra IA</strong>.</p>
             <div className="mt-6 flex gap-3">
               <Link href="/contacto" className="rounded-2xl px-5 py-3 bg-black text-white hover:opacity-90">Solicitar valoración gratuita</Link>
-              <a href="https://wa.me/34600000000?text=Quiero%20valorar%20mi%20propiedad" className="rounded-2xl px-5 py-3 border">Hablar por WhatsApp</a>
+              <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WA_PHONE || '34600000000'}?text=${encodeURIComponent(waMessage)}`} className="rounded-2xl px-5 py-3 border">Hablar por WhatsApp</a>
             </div>
           </div>
           <div className="grid gap-2">
@@ -108,7 +110,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PLANES */}
       <section className="bg-muted/30 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-semibold">Planes de gestión</h2>
@@ -130,23 +131,13 @@ export default function Page() {
         </div>
       </section>
 
-      {/* CÓMO EMPEZAMOS */}
       <section className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-semibold">Cómo empezamos</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {[
-            {
-              t: '1) Estudio de rentabilidad',
-              d: 'Analizamos ubicación, capacidad y temporada para proyectar ingresos. (48h)'
-            },
-            {
-              t: '2) Puesta a punto',
-              d: 'Fotografías, anuncio, amenities y configuración de precios dinámicos.'
-            },
-            {
-              t: '3) Go‑Live',
-              d: 'Activamos canales y web propia. Check‑in autónomo listo y Sandra IA atendiendo 24/7.'
-            },
+            { t: '1) Estudio de rentabilidad', d: 'Analizamos ubicación, capacidad y temporada para proyectar ingresos. (48h)' },
+            { t: '2) Puesta a punto', d: 'Fotografías, anuncio, amenities y configuración de precios dinámicos.' },
+            { t: '3) Go-Live', d: 'Activamos canales y web propia. Check-in autónomo listo y Sandra IA atendiendo 24/7.' },
           ].map((s) => (
             <div key={s.t} className="rounded-2xl border p-6 bg-white">
               <h3 className="font-medium">{s.t}</h3>
@@ -158,6 +149,9 @@ export default function Page() {
           <Link href="/contacto" className="rounded-2xl px-5 py-3 bg-black text-white">Solicitar valoración gratuita</Link>
         </div>
       </section>
+
+      {/* Botón flotante con mensaje específico de esta página */}
+      <WhatsAppFloat text={waMessage} />
     </main>
   );
 }
