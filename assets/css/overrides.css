@@ -1,0 +1,5 @@
+
+/* Anti-FAB y ajustes mínimos */
+.fab, .floating, .floating-actions, .floating-buttons, .whatsapp-fab,
+[data-fab], [class*="fab-"], [id*="fab"] { display: none !important; }
+#chat-log { background:#0e1622; }
